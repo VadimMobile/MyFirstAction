@@ -1,4 +1,12 @@
 <resources>
     <string name="app_name" translatable="false">Nmedia</string>
     <string name="nmedia" translatable="false">NMedia!</string>
+    <string name="menu_image_description">Menu</string>
+    <string name="avatar_description">avatar</string>
+    <string name="baseline_favorite_24_xml">baseline_favorite_24.xml</string>
+    <string name="baseline_share_24_xml">baseline_share_24.xml</string>
+    <string name="baseline_visibility_24_xml">baseline_visibility_24.xml</string>
+    <string name="counterLikes">123</string>
+    <string name="counterShare">46</string>
+    <string name="counterViews">576</string>
 </resources>

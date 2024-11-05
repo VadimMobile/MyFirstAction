@@ -2,4 +2,12 @@
 <resources>
     <string name="app_name">НМедиа</string>
     <string name="nmedia">НМедиа!</string>
+    <string name="menu_image_description">Меню</string>
+    <string name="avatar_description">Аватар</string>
+    <string name="baseline_favorite_24_xml">Лайки</string>
+    <string name="baseline_share_24_xml">Репосты</string>
+    <string name="baseline_visibility_24_xml">Просмотры</string>
+    <string name="counterLikes">123</string>
+    <string name="counterShare">46</string>
+    <string name="counterViews">576</string>
 </resources>

@@ -21,3 +21,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "Nmedia"
 include(":app")
+include(":dto")

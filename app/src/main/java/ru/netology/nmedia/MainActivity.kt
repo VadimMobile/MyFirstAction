@@ -53,18 +53,23 @@ class MainActivity : AppCompatActivity() {
             )
         }
 
-       // binding.likes.setOnClickListener {
-         //   post.likedByMe = !post.likedByMe
-         //if (post.likedByMe) post.counterLikes++ else post.counterLikes--
-        //} здесь я попытался увеличить счётчик лайков
-        // счётчик не увеличился, кнопка лайка перестала окрашиваться после нажатия
+        binding.likes.setOnClickListener {
+            post.likedByMe = !post.likedByMe
+         if (post.likedByMe) post.counterLikes++ else post.counterLikes--
+        binding.counterLikes.text = post.counterLikes.toString()
+        }
+
 
         binding.share.setOnClickListener {
             post.sharedByMe = !post.sharedByMe
             binding.share.setImageResource(
                 R.drawable.baseline_share_24
             )
-
         }
+        binding.share.setOnClickListener {
+            post.sharedByMe = !post.sharedByMe
+         post.counterShare++
+        binding.counterShare.text = post.counterShare.toString()
+            }
     }
 }

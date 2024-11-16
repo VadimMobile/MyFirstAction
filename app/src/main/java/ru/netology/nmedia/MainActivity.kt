@@ -1,12 +1,7 @@
 package ru.netology.nmedia
 
-import android.app.Activity
 import android.os.Bundle
-import android.widget.ImageView
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import ru.netology.nmedia.databinding.ActivityMainBinding
 import ru.netology.nmedia.dto.Post
 
@@ -57,6 +52,14 @@ class MainActivity : AppCompatActivity() {
             post.likedByMe = !post.likedByMe
          if (post.likedByMe) post.counterLikes++ else post.counterLikes--
         binding.counterLikes.text = post.counterLikes.toString()
+            binding.likes.setImageResource(
+                if (post.likedByMe){
+                    R.drawable.baseline_favorite_24
+                }else{
+                    R.drawable.ic_favorite_border_24
+                }
+            )
+            binding.counterLikes.text = Utils.formatCounter(post.counterLikes)
         }
 
 

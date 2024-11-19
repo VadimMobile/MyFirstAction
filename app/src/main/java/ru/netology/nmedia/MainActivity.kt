@@ -1,6 +1,7 @@
 package ru.netology.nmedia
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import ru.netology.nmedia.databinding.ActivityMainBinding
 import ru.netology.nmedia.dto.Post
@@ -16,7 +17,7 @@ class MainActivity : AppCompatActivity() {
 
         val post = Post(
             id = 1,
-            counterLikes = 999,
+            counterLikes = 2999999,
             counterShare = 999,
             author =  "Нетология. Университет интернет-профессий будущего",
         //authorAvatar = "@sample/posts_avatars",
@@ -73,6 +74,10 @@ class MainActivity : AppCompatActivity() {
             post.sharedByMe = !post.sharedByMe
          post.counterShare++
         binding.counterShare.text = post.counterShare.toString()
+            binding.counterShare.text = Utils.formatCounter(post.counterShare)
             }
+        //binding.root.setOnClickListener{Toast.makeText(this@MainActivity, "root", Toast.LENGTH_SHORT).show()}
+        //binding.likes.setOnClickListener {Toast.makeText(this@MainActivity, "likes", Toast.LENGTH_SHORT).show()}
+       // binding.avatar.setOnClickListener { Toast.makeText(this@MainActivity, "avatar", Toast.LENGTH_SHORT).show() }
     }
 }

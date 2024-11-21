@@ -78,6 +78,6 @@ class MainActivity : AppCompatActivity() {
             }
         //binding.root.setOnClickListener{Toast.makeText(this@MainActivity, "root", Toast.LENGTH_SHORT).show()}
         //binding.likes.setOnClickListener {Toast.makeText(this@MainActivity, "likes", Toast.LENGTH_SHORT).show()}
-       // binding.avatar.setOnClickListener { Toast.makeText(this@MainActivity, "avatar", Toast.LENGTH_SHORT).show() }
+        //binding.avatar.setOnClickListener { Toast.makeText(this@MainActivity, "avatar", Toast.LENGTH_SHORT).show() }
     }
 }

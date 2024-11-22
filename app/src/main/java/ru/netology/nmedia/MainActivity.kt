@@ -53,9 +53,9 @@ class MainActivity : AppCompatActivity() {
             //binding.avatar.setOnClickListener { Toast.makeText(this@MainActivity, "avatar", Toast.LENGTH_SHORT).show()}
             // Проверка обработчика со всплывающей иконкой в приложении.
         }
-            binding.likes.setOnClickListener {
-             viewModel.likes()
-            }
+        binding.likes.setOnClickListener {
+            viewModel.likes()
+        }
         binding.share.setOnClickListener {
             viewModel.share()
         }

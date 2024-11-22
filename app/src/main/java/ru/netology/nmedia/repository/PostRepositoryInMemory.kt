@@ -33,7 +33,7 @@ class PostRepositoryInMemory : PostRepository {
     override fun share() {
         val currentPost = data.value ?: return
         val updatedPost = currentPost.copy(
-            sharedByMe = !currentPost.sharedByMe,
+            sharedByMe = true,
             share = currentPost.share + 1
         )
         data.value = updatedPost

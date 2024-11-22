@@ -8,8 +8,8 @@ class PostRepositoryInMemory : PostRepository {
     private val data = MutableLiveData<Post>(
         Post(
             id = 1,
-            likes = 2999999,
-            counterShare = 999,
+            likes = 5679,
+            share = 649,
             author =  "Нетология. Университет интернет-профессий будущего",
             //authorAvatar = "@sample/posts_avatars",
             published = "21 мая в 18:36",
@@ -26,6 +26,15 @@ class PostRepositoryInMemory : PostRepository {
         val updatedPost = currentPost.copy(
             likedByMe = !currentPost.likedByMe,
             likes = if (currentPost.likedByMe) {currentPost.likes - 1} else {currentPost.likes + 1}
+        )
+        data.value = updatedPost
+    }
+
+    override fun share() {
+        val currentPost = data.value ?: return
+        val updatedPost = currentPost.copy(
+            sharedByMe = !currentPost.sharedByMe,
+            share = currentPost.share + 1
         )
         data.value = updatedPost
     }

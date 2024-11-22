@@ -21,7 +21,7 @@ class MainActivity : AppCompatActivity() {
 
         viewModel.post.observe(this) { post ->
             binding.counterLikes.text = Utils.formatCounter(post.likes)
-            binding.counterShare.text = post.counterShare.toString()
+            binding.counterShare.text = Utils.formatCounter(post.share)
             binding.content.text = post.content
             binding.published.text = post.published
             binding.author.text = post.author
@@ -56,5 +56,8 @@ class MainActivity : AppCompatActivity() {
             binding.likes.setOnClickListener {
              viewModel.likes()
             }
+        binding.share.setOnClickListener {
+            viewModel.share()
+        }
     }
 }

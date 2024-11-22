@@ -19,10 +19,10 @@ class MainActivity : AppCompatActivity() {
             id = 1,
             counterLikes = 2999999,
             counterShare = 999,
-            author = "Нетология. Университет интернет-профессий будущего",
-            //authorAvatar = "@sample/posts_avatars",
+            author =  "Нетология. Университет интернет-профессий будущего",
+        //authorAvatar = "@sample/posts_avatars",
             published = "21 мая в 18:36",
-            content = "Привет, это новая Нетология! Когда-то Нетология начиналась с интенсивов по онлайн-маркетингу. Затем появились курсы по дизайну, разработке, аналитике и управлению. Мы растём сами и помогаем расти студентам: от новичков до уверенных профессионалов. Но самое важное остаётся с нами: мы верим, что в каждом уже есть сила, которая заставляет хотеть больше, целиться выше, бежать быстрее. Наша миссия — помочь встать на путь роста и начать цепочку перемен → http://netolo.gy/fyb"
+        content =  "Привет, это новая Нетология! Когда-то Нетология начиналась с интенсивов по онлайн-маркетингу. Затем появились курсы по дизайну, разработке, аналитике и управлению. Мы растём сами и помогаем расти студентам: от новичков до уверенных профессионалов. Но самое важное остаётся с нами: мы верим, что в каждом уже есть сила, которая заставляет хотеть больше, целиться выше, бежать быстрее. Наша миссия — помочь встать на путь роста и начать цепочку перемен → http://netolo.gy/fyb"
         )
 
         binding.counterLikes.text = post.counterLikes.toString()
@@ -31,9 +31,9 @@ class MainActivity : AppCompatActivity() {
         binding.published.text = post.published
         binding.author.text = post.author
         binding.likes.setImageResource(
-            if (post.likedByMe) {
+            if (post.likedByMe){
                 R.drawable.baseline_favorite_24
-            } else {
+                }else{
                 R.drawable.ic_favorite_border_24
             }
         )
@@ -41,9 +41,9 @@ class MainActivity : AppCompatActivity() {
         binding.likes.setOnClickListener {
             post.likedByMe = !post.likedByMe
             binding.likes.setImageResource(
-                if (post.likedByMe) {
+                if (post.likedByMe){
                     R.drawable.baseline_favorite_24
-                } else {
+                }else{
                     R.drawable.ic_favorite_border_24
                 }
             )
@@ -51,12 +51,12 @@ class MainActivity : AppCompatActivity() {
 
         binding.likes.setOnClickListener {
             post.likedByMe = !post.likedByMe
-            if (post.likedByMe) post.counterLikes++ else post.counterLikes--
-            binding.counterLikes.text = post.counterLikes.toString()
+         if (post.likedByMe) post.counterLikes++ else post.counterLikes--
+        binding.counterLikes.text = post.counterLikes.toString()
             binding.likes.setImageResource(
-                if (post.likedByMe) {
+                if (post.likedByMe){
                     R.drawable.baseline_favorite_24
-                } else {
+                }else{
                     R.drawable.ic_favorite_border_24
                 }
             )
@@ -72,13 +72,12 @@ class MainActivity : AppCompatActivity() {
         }
         binding.share.setOnClickListener {
             post.sharedByMe = !post.sharedByMe
-            post.counterShare++
-            binding.counterShare.text = post.counterShare.toString()
+         post.counterShare++
+        binding.counterShare.text = post.counterShare.toString()
             binding.counterShare.text = Utils.formatCounter(post.counterShare)
-        }
+            }
         //binding.root.setOnClickListener{Toast.makeText(this@MainActivity, "root", Toast.LENGTH_SHORT).show()}
         //binding.likes.setOnClickListener {Toast.makeText(this@MainActivity, "likes", Toast.LENGTH_SHORT).show()}
-        //binding.avatar.setOnClickListener { Toast.makeText(this@MainActivity, "avatar", Toast.LENGTH_SHORT).show()}
-        // Проверка обработчика со всплывающей иконкой в приложении.
+        //binding.avatar.setOnClickListener { Toast.makeText(this@MainActivity, "avatar", Toast.LENGTH_SHORT).show() }
     }
 }

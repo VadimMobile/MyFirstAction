@@ -8,7 +8,7 @@ class PostRepositoryInMemory : PostRepository {
     private val data = MutableLiveData<Post>(
         Post(
             id = 1,
-            counterLikes = 2999999,
+            likes = 2999999,
             counterShare = 999,
             author =  "Нетология. Университет интернет-профессий будущего",
             //authorAvatar = "@sample/posts_avatars",
@@ -23,10 +23,10 @@ class PostRepositoryInMemory : PostRepository {
 
     override fun likes() {
         val currentPost = data.value ?: return
-       val updatedPost = currentPost.copy(
-           likedByMe = !currentPost.likedByMe,
-     likes = if (currentPost.likedByMe) {0} else {1}
-       )
+        val updatedPost = currentPost.copy(
+            likedByMe = !currentPost.likedByMe,
+            likes = if (currentPost.likedByMe) {currentPost.likes - 1} else {currentPost.likes + 1}
+        )
         data.value = updatedPost
     }
 }

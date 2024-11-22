@@ -19,16 +19,16 @@ class MainActivity : AppCompatActivity() {
 
         val viewModel by viewModels<PostViewModel>()
 
-        viewModel.post.observe(this){ post ->
-            binding.counterLikes.text = post.counterLikes.toString()
+        viewModel.post.observe(this) { post ->
+            binding.counterLikes.text = Utils.formatCounter(post.likes)
             binding.counterShare.text = post.counterShare.toString()
             binding.content.text = post.content
             binding.published.text = post.published
             binding.author.text = post.author
             binding.likes.setImageResource(
-                if (post.likedByMe){
+                if (post.likedByMe) {
                     R.drawable.baseline_favorite_24
-                }else{
+                } else {
                     R.drawable.ic_favorite_border_24
                 }
             )
@@ -52,9 +52,9 @@ class MainActivity : AppCompatActivity() {
             //binding.likes.setOnClickListener {Toast.makeText(this@MainActivity, "likes", Toast.LENGTH_SHORT).show()}
             //binding.avatar.setOnClickListener { Toast.makeText(this@MainActivity, "avatar", Toast.LENGTH_SHORT).show()}
             // Проверка обработчика со всплывающей иконкой в приложении.
+        }
             binding.likes.setOnClickListener {
              viewModel.likes()
             }
-        }
     }
 }

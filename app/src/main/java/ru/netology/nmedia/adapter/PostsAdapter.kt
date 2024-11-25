@@ -6,31 +6,45 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import ru.netology.nmedia.R
+import ru.netology.nmedia.Utils
 import ru.netology.nmedia.databinding.CardPostBinding
 import ru.netology.nmedia.dto.Post
 
-typealias LikeCallback = (Post)-> Unit
-typealias ShareCallback = (Post)-> Unit
-class PostsAdapter(private val callbackLike: LikeCallback, private val callbackShare: ShareCallback) : ListAdapter<Post, PostViewHolder> (PostDiffCallback){
+typealias LikeCallback = (Post) -> Unit
+typealias ShareCallback = (Post) -> Unit
+
+class PostsAdapter(
+    private val callbackLike: LikeCallback,
+    private val callbackShare: ShareCallback
+) : ListAdapter<Post, PostViewHolder>(PostDiffCallback) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PostViewHolder {
-        return PostViewHolder(CardPostBinding.inflate(LayoutInflater.from(parent.context), parent,false), callbackLike,callbackShare)
+        return PostViewHolder(
+            CardPostBinding.inflate(
+                LayoutInflater.from(parent.context),
+                parent,
+                false
+            ), callbackLike, callbackShare
+        )
     }
 
 
     override fun onBindViewHolder(holder: PostViewHolder, position: Int) {
-holder.bind(getItem(position))    }
+        holder.bind(getItem(position))
+    }
 }
 
-class PostViewHolder(private val binding: CardPostBinding, private val callbackLike: LikeCallback,
-                     private val callbackShare: ShareCallback) : RecyclerView.ViewHolder(binding.root) {
+class PostViewHolder(
+    private val binding: CardPostBinding, private val callbackLike: LikeCallback,
+    private val callbackShare: ShareCallback
+) : RecyclerView.ViewHolder(binding.root) {
     fun bind(post: Post) = with(binding) {
         author.text = post.author
         published.text = post.published
         content.text = post.content
-    likes.setImageResource(
-           if (post.likedByMe) R.drawable.baseline_favorite_24 else R.drawable.ic_favorite_border_24
-       )
+        likes.setImageResource(
+            if (post.likedByMe) R.drawable.baseline_favorite_24 else R.drawable.ic_favorite_border_24
+        )
         likes.setOnClickListener {
             callbackLike(post)
         }
@@ -40,12 +54,12 @@ class PostViewHolder(private val binding: CardPostBinding, private val callbackL
         share.setOnClickListener {
             callbackShare(post)
         }
-        counterLikes.text = post.likes.toString()
-        counterShare.text = post.share.toString()
+        counterLikes.text = Utils.formatCounter(post.likes)
+        counterShare.text = Utils.formatCounter(post.share)
     }
 }
 
-object PostDiffCallback: DiffUtil.ItemCallback<Post>(){
+object PostDiffCallback : DiffUtil.ItemCallback<Post>() {
     override fun areItemsTheSame(oldItem: Post, newItem: Post) = oldItem.id == newItem.id
 
     override fun areContentsTheSame(oldItem: Post, newItem: Post) = oldItem == newItem

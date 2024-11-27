@@ -14,5 +14,5 @@
     <string name="description_post_save">Сохранить</string>
     <string name="error_empty_content">Содержимое не может быть пустым</string>
     <string name="menu_edit">Редактирование</string>
-    <string name="description_post_no_edit">Отмена редактирования</string>
+    <string name="description_post_no_edit">Отмена редактир</string>
 </resources>

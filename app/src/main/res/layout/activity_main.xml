@@ -41,11 +41,11 @@
         android:id="@+id/no_edit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="48dp"
+        android:layout_marginBottom="8dp"
         android:background="@android:color/transparent"
         android:contentDescription="@string/description_post_no_edit"
         android:src="@drawable/ic_no_edit_48"
-        app:layout_constraintBottom_toBottomOf="@id/content"
+        app:layout_constraintBottom_toTopOf="@id/content"
         app:layout_constraintEnd_toEndOf="parent" />
 
     <androidx.constraintlayout.widget.Group
@@ -53,8 +53,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:visibility="visible"
-        app:layout_constraintBottom_toBottomOf="@id/no_edit"
-        app:layout_constraintEnd_toEndOf="@id/no_edit"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:constraint_referenced_ids="no_edit" />
 
 

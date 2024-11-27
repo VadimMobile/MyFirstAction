@@ -60,7 +60,7 @@ class MainActivity : AppCompatActivity() {
                 binding.content.setText(it.content)
                 binding.content.focusAndShowKeyboard()
             }
-            binding.group.visibility =  if(it.id == 0L) View.VISIBLE else View.GONE
+            binding.group.visibility =  if(it.id == 0L) View.GONE else View.VISIBLE
         }
         binding.save.setOnClickListener{
             val text = binding.content.text.toString()

@@ -37,6 +37,27 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
+    <ImageButton
+        android:id="@+id/no_edit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="48dp"
+        android:background="@android:color/transparent"
+        android:contentDescription="@string/description_post_no_edit"
+        android:src="@drawable/ic_no_edit_48"
+        app:layout_constraintBottom_toBottomOf="@id/content"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/group"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="@id/no_edit"
+        app:layout_constraintEnd_toEndOf="@id/no_edit"
+        app:constraint_referenced_ids="no_edit" />
+
+
     <androidx.constraintlayout.widget.Barrier
         android:id="@+id/barrier"
         android:layout_width="wrap_content"

@@ -1,6 +1,7 @@
 package ru.netology.nmedia
 
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -41,6 +42,9 @@ class MainActivity : AppCompatActivity() {
                 viewModel.edit(post)
             }
 
+            override fun noEdit(post: Post) {
+                viewModel.noEdit()
+            }
         })
         binding.container.adapter = adapter
         viewModel.data.observe(this) { posts ->
@@ -56,6 +60,7 @@ class MainActivity : AppCompatActivity() {
                 binding.content.setText(it.content)
                 binding.content.focusAndShowKeyboard()
             }
+            binding.group.visibility =  if(it.id == 0L) View.VISIBLE else View.GONE
         }
         binding.save.setOnClickListener{
             val text = binding.content.text.toString()
@@ -66,6 +71,12 @@ class MainActivity : AppCompatActivity() {
             }
             viewModel.saveContent(text)
 
+            binding.content.setText("")
+            binding.content.clearFocus()
+            AndroidUtils.hideKeyboard(it)
+        }
+        binding.noEdit.setOnClickListener {
+            viewModel.noEdit()
             binding.content.setText("")
             binding.content.clearFocus()
             AndroidUtils.hideKeyboard(it)

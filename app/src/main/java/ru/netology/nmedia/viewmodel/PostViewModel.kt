@@ -38,4 +38,8 @@ class PostViewModel : ViewModel() {
     fun edit(post: Post){
         edited.value = post
     }
+
+    fun noEdit (){
+        edited.value = empty
+    }
 }

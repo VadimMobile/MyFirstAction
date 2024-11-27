@@ -10,4 +10,8 @@
     <string name="counterLikes">123</string>
     <string name="counterShare">46</string>
     <string name="counterViews">576</string>
+    <string name="menu_remove">Удаление</string>
+    <string name="description_post_save">Сохранить</string>
+    <string name="error_empty_content">Содержимое не может быть пустым</string>
+    <string name="menu_edit">Редактирование</string>
 </resources>

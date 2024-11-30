@@ -42,12 +42,14 @@ dependencies {
 
     val activityVersion = "1.9.3"
     val recyclerviewVersion = "1.3.2"
+    val mdcVersion = "1.12.0"
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
+    implementation("com.google.android.material:material:$mdcVersion")
     implementation ("androidx.recyclerview:recyclerview:$recyclerviewVersion")
     implementation("androidx.activity:activity-ktx:$activityVersion")
     testImplementation(libs.junit)

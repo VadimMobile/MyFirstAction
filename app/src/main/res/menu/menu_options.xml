@@ -6,4 +6,20 @@
     <item
         android:id="@+id/edit"
         android:title="@string/menu_edit"/>
+
+<!--    <com.google.android.material.button.MaterialButtonToggleGroup-->
+<!--    ...>-->
+<!--    <Button-->
+<!--        style="@style/Widget.App.Button.OutlinedButton.IconOnly"-->
+<!--     android:id="@+id/edit"-->
+<!--    android:title="@string/menu_edit"-->
+<!--    />-->
+<!--    <Button-->
+<!--        style="@style/Widget.App.Button.OutlinedButton.IconOnly"-->
+<!--        android:id="@+id/remove"-->
+<!--        android:title="@string/menu_remove"-->
+<!--    />-->
+<!--</com.google.android.material.button.MaterialButtonToggleGroup>-->
+
 </menu>
+

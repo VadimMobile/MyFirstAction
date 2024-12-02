@@ -48,21 +48,20 @@ class PostViewHolder(
         author.text = post.author
         published.text = post.published
         content.text = post.content
-        like.isCheked = post.likedByMe
+        likes.isChecked = post.likedByMe
+        likes.text = post.likes.toString()
 //        likes.setImageResource(
 //            if (post.likedByMe) R.drawable.baseline_favorite_24 else R.drawable.ic_favorite_border_24
 //        )
         likes.setOnClickListener {
             OnInteractionListener.onLike(post)
         }
-        share.setImageResource(
-            if (post.sharedByMe) R.drawable.baseline_share_24 else R.drawable.baseline_share_24
-        )
+
         share.setOnClickListener {
             OnInteractionListener.onShare(post)
         }
-        counterLikes.text = Utils.formatCounter(post.likes)
-        counterShare.text = Utils.formatCounter(post.share)
+        likes.text = Utils.formatCounter(post.likes)
+        share.text = Utils.formatCounter(post.share)
 
         menu.setOnClickListener{
             PopupMenu(it.context, it).apply {

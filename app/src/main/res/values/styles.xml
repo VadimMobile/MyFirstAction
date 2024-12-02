@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+
+    <style name="Widget.App.LikedButton" parent="Widget.Material3.Button.TextButton.Icon">
+        <item name="iconTint">@color/like_color</item>
+        <item name="android:minWidth">0dp</item>
+    </style>
+
+    <style name="Widget.App.SharedButton" parent="Widget.Material3.Button.TextButton.Icon">
+        <item name="iconTint">@color/share_color</item>
+        <item name="android:minWidth">0dp</item>
+    </style>
+
+    <style name="Widget.App.ViewButton" parent="Widget.Material3.Button.TextButton.Icon">
+        <item name="iconTint">@color/view_color</item>
+        <item name="android:minWidth">0dp</item>
+    </style>
+
+<!--    <style name="Widget.App.Button.OutlinedButton.MenuOptions" parent="Widget.Material3.Button.OutlinedButton">--> стиль меню опций (кнопка в виде трех точек)
+<!--        <item name="iconPadding">0dp</item>-->
+<!--        <item name="android:insetTop">0dp</item>-->
+<!--        <item name="android:insetBottom">0dp</item>-->
+<!--        <item name="android:paddingLeft">12dp</item>-->
+<!--        <item name="android:paddingRight">12dp</item>-->
+<!--        <item name="android:minWidth">48dp</item>-->
+<!--        <item name="android:minHeight">48dp</item>-->
+<!--    </style>--> скопипастил стиль с мт3, но не разобрался м реализацией
+
+</resources>

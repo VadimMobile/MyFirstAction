@@ -50,9 +50,9 @@ class PostViewHolder(
         content.text = post.content
         likes.isChecked = post.likedByMe
         likes.text = post.likes.toString()
-//        likes.setImageResource(
-//            if (post.likedByMe) R.drawable.baseline_favorite_24 else R.drawable.ic_favorite_border_24
-//        )
+        share.isChecked = post.sharedByMe
+        //share.isCheckable = !post.sharedByMe - перестает моргать, но меняет цвет
+
         likes.setOnClickListener {
             OnInteractionListener.onLike(post)
         }

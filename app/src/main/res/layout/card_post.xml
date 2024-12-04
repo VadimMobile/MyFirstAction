@@ -44,14 +44,15 @@
 
     <ImageView
         android:id="@+id/menu"
+        android:checkable="true"
+        style="@style/Widget.App.MenuButton"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_width="48dp"
         android:layout_height="48dp"
-        android:background="?selectableItemBackgroundBorderless"
         android:contentDescription="@string/avatar_description"
         app:tint="?colorControlNormal"
-        app:srcCompat="@drawable/baseline_more_vert_24" />
+        app:icon="@drawable/baseline_more_vert_24" />
 
     <androidx.constraintlayout.widget.Barrier
         android:id="@+id/headerBarrier"

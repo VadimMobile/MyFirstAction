@@ -42,7 +42,7 @@
         app:layout_constraintTop_toBottomOf="@id/author"
         tools:text="@sample/posts.json/data/published" />
 
-    <ImageView
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/menu"
         android:checkable="true"
         style="@style/Widget.App.MenuButton"

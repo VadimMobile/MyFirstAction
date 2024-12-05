@@ -51,7 +51,7 @@ class PostViewHolder(
         likes.isChecked = post.likedByMe
         likes.text = post.likes.toString()
         share.isChecked = post.sharedByMe
-        //share.isCheckable = !post.sharedByMe - перестает моргать, но меняет цвет
+        share.isCheckable = !post.sharedByMe
 
         likes.setOnClickListener {
             OnInteractionListener.onLike(post)

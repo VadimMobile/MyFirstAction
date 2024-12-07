@@ -5,12 +5,12 @@ plugins {
 
 android {
     namespace = "ru.netology.nmedia"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "ru.netology.nmedia"
         minSdk = 23
-        targetSdk = 34
+        targetSdk = 35
         versionCode = 1
         versionName = "1.0"
 
@@ -40,19 +40,28 @@ buildFeatures{
 
 dependencies {
 
-    val activityVersion = "1.9.3"
-    val recyclerviewVersion = "1.3.2"
-    val mdcVersion = "1.12.0"
-
-    implementation(libs.androidx.core.ktx)
-    implementation(libs.androidx.appcompat)
-    implementation(libs.material)
     implementation(libs.androidx.activity)
-    implementation(libs.androidx.constraintlayout)
-    implementation("com.google.android.material:material:$mdcVersion")
+    val coreVersion = "1.15.0"
+    val appcompatVersion = "1.7.0"
+    val mdcVersion = "1.12.0"
+    val constraintlayoutVersion = "2.2.0"
+    val recyclerviewVersion = "1.3.2"
+    val junitVersion = "4.13.2"
+    val extJunitVersion = "1.2.1"
+    val espressoCoreVersion = "3.6.1"
+    val activityVersion = "1.9.3"
+    val lifecycleVersion = "2.8.7"
+
+    implementation ("androidx.core:core-ktx:$coreVersion")
+    implementation ("androidx.appcompat:appcompat:$appcompatVersion")
+    implementation ("com.google.android.material:material:$mdcVersion")
+    implementation ("androidx.constraintlayout:constraintlayout:$constraintlayoutVersion")
     implementation ("androidx.recyclerview:recyclerview:$recyclerviewVersion")
-    implementation("androidx.activity:activity-ktx:$activityVersion")
-    testImplementation(libs.junit)
-    androidTestImplementation(libs.androidx.junit)
-    androidTestImplementation(libs.androidx.espresso.core)
+    implementation ("androidx.activity:activity-ktx:$activityVersion")
+    implementation ("androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleVersion")
+    implementation ("androidx.lifecycle:lifecycle-livedata-ktx:$lifecycleVersion")
+
+    testImplementation ("junit:junit:$junitVersion")
+    androidTestImplementation ("androidx.test.ext:junit:$extJunitVersion")
+    androidTestImplementation ("androidx.test.espresso:espresso-core:$espressoCoreVersion")
 }

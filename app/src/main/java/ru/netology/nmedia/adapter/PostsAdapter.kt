@@ -63,20 +63,28 @@ class PostViewHolder(
         likes.text = Utils.formatCounter(post.likes)
         share.text = Utils.formatCounter(post.share)
 
-        menu.setOnClickListener{
+        menu.setOnClickListener {
+            var isMenuValid = false
+            menu.postDelayed({ isMenuValid = true }, 500) // Разрешить действия через 0.5 секунды
+
             PopupMenu(it.context, it).apply {
                 inflate(R.menu.menu_options)
-                setOnMenuItemClickListener {
-                    when (it.itemId) {
-                        R.id.remove -> {
-                            OnInteractionListener.onRemove(post)
-                            true
+                setOnMenuItemClickListener { item ->
+                    if (isMenuValid) {
+                        when (item.itemId) {
+                            R.id.remove -> {
+                                OnInteractionListener.onRemove(post)
+                                true
+                            }
+                            R.id.edit -> {
+                                OnInteractionListener.onEdit(post)
+                                true
+                            }
+                            else -> false
                         }
-                        R.id.edit -> {
-                            OnInteractionListener.onEdit(post)
-                            true
-                        }
-                        else -> false
+                    } else {
+                        // Если меню не готово, игнорируем нажатие
+                        false
                     }
                 }
             }.show()

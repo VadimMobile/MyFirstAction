@@ -1,13 +1,14 @@
-package ru.netology.nmedia
+package ru.netology.nmedia.activity
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
+import androidx.activity.result.launch
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import ru.netology.nmedia.adapter.PostsAdapter
 import ru.netology.nmedia.databinding.ActivityMainBinding
-import ru.netology.nmedia.databinding.CardPostBinding
 import ru.netology.nmedia.dto.Post
 import ru.netology.nmedia.viewmodel.PostViewModel
 import ru.netology.nmedia.R
@@ -25,13 +26,26 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         val viewModel: PostViewModel by viewModels()
+        val newPostLauncher = registerForActivityResult(NewPostContract){result ->
+            result ?: return@registerForActivityResult
+            viewModel.saveContent(result)
+
+        }
         val adapter = PostsAdapter(object : OnInteractionListener {
             override fun onLike(post: Post) {
                viewModel.likeById(post.id)
             }
 
             override fun onShare(post: Post) {
-                viewModel.shareById(post.id)
+                val intent = Intent().apply {
+                    action = Intent.ACTION_SEND
+                    type = "text/plain"
+                    putExtra(Intent.EXTRA_TEXT, post.content)
+                }
+
+                val shareIntent = Intent.createChooser(intent, getString(R.string.chooser_share_post))
+
+                startActivity(shareIntent)
             }
 
             override fun onRemove(post: Post) {
@@ -55,31 +69,8 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
-        viewModel.edited.observe(this){
-            if (it.id != 0L){
-                binding.content.setText(it.content)
-                binding.content.focusAndShowKeyboard()
-            }
-            binding.group.visibility =  if(it.id == 0L) View.GONE else View.VISIBLE
-        }
         binding.save.setOnClickListener{
-            val text = binding.content.text.toString()
-
-            if (text.isBlank()){
-                Toast.makeText(this,R.string.error_empty_content, Toast.LENGTH_LONG).show()
-                return@setOnClickListener
-            }
-            viewModel.saveContent(text)
-
-            binding.content.setText("")
-            binding.content.clearFocus()
-            AndroidUtils.hideKeyboard(it)
-        }
-        binding.noEdit.setOnClickListener {
-            viewModel.noEdit()
-            binding.content.setText("")
-            binding.content.clearFocus()
-            AndroidUtils.hideKeyboard(it)
+            newPostLauncher.launch(null)
         }
     }
 }

@@ -13,6 +13,8 @@
     <string name="description_post_save" translatable="false">Save</string>
     <string name="error_empty_content" translatable="false">Content can\'t be empty</string>
     <string name="menu_edit" translatable="false">Edit</string>
-    <string name="description_post_no_edit">No edit</string>
-    <string name="chooser_share_post">Share\n</string>
+    <string name="description_post_no_edit" translatable="false">No edit</string>
+    <string name="chooser_share_post" translatable="false">Share\n</string>
+    <string name="play_video_description" />
+    <string name="background_video_description">background_video</string>
 </resources>

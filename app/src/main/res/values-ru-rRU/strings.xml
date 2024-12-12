@@ -15,4 +15,5 @@
     <string name="error_empty_content">Содержимое не может быть пустым</string>
     <string name="menu_edit">Редактирование</string>
     <string name="description_post_no_edit">Отмена редактир</string>
+    <string name="chooser_share_post">Поделиться постом</string>
 </resources>

@@ -20,7 +20,7 @@ class PostViewModel : ViewModel() {
 
     val data = repository.getAll()
 
-    var edited = MutableLiveData(empty)
+    private var edited = MutableLiveData(empty)
 
     fun  saveContent(content: String) {
         edited.value?.let {

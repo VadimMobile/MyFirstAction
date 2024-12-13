@@ -18,6 +18,7 @@ interface OnInteractionListener{
     fun onRemove (post: Post)
     fun onEdit (post: Post)
     fun noEdit (post: Post)
+    fun onVideo (post: Post)
 }
 
 class PostsAdapter(
@@ -60,6 +61,11 @@ class PostViewHolder(
         share.setOnClickListener {
             OnInteractionListener.onShare(post)
         }
+
+        playVideoGroup.setOnClickListener{
+            OnInteractionListener.onVideo(post)
+        }
+
         likes.text = Utils.formatCounter(post.likes)
         share.text = Utils.formatCounter(post.share)
 

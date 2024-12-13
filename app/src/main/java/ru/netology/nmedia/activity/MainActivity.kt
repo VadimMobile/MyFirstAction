@@ -30,6 +30,7 @@ class MainActivity : AppCompatActivity() {
         val newPostLauncher = registerForActivityResult(NewPostContract){result ->
             result ?: return@registerForActivityResult
             viewModel.saveContent(result)
+            viewModel.checkContent(result)
 
         }
         val adapter = PostsAdapter(object : OnInteractionListener {

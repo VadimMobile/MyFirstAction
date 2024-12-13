@@ -42,4 +42,16 @@ class PostViewModel : ViewModel() {
     fun noEdit (){
         edited.value = empty
     }
+
+    fun checkContent(content: String) {
+        edited.value?.let {
+            val trimmed = content.trim()
+            if (trimmed == it.content) {
+                return
+            }
+            edited.value = it.copy(content = trimmed)
+        }
+    }
+
+
 }

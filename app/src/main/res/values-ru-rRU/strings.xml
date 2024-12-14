@@ -16,4 +16,6 @@
     <string name="menu_edit">Редактирование</string>
     <string name="description_post_no_edit">Отмена редактир</string>
     <string name="chooser_share_post">Поделиться постом</string>
+    <string name="play_video_description">Воспроизведение видео</string>
+    <string name="background_video_description">Заставка видео</string>
 </resources>

@@ -28,10 +28,10 @@ class MainActivity : AppCompatActivity() {
 
         val viewModel: PostViewModel by viewModels()
         val newPostLauncher = registerForActivityResult(NewPostContract){result ->
-            result ?: return@registerForActivityResult
-            viewModel.saveContent(result)
-            viewModel.checkContent(result)
-
+            result?.let {
+                viewModel.saveContent(result)
+                viewModel.checkContent(result)
+            }
         }
         val adapter = PostsAdapter(object : OnInteractionListener {
             override fun onLike(post: Post) {

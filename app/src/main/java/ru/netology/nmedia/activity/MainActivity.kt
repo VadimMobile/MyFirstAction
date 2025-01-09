@@ -32,7 +32,8 @@ class MainActivity : AppCompatActivity() {
                 viewModel.checkContent(result)
                 viewModel.saveContent(result)
             } else {
-                edited.value = post
+                fun noEdit (){
+                }
             }
         }
         val adapter = PostsAdapter(object : OnInteractionListener {

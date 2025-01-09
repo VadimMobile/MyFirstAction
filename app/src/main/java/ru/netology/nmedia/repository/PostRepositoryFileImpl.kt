@@ -7,17 +7,17 @@ import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import ru.netology.nmedia.dto.Post
 
-class PostRepositoryFileImpl (context: Context) : PostRepository  {
+class PostRepositoryFileImpl (private val context: Context) : PostRepository  {
     companion object{
         private val gson = Gson()
         private val token = TypeToken.getParameterized(List::class.java, Post::class.java).type
 
+        private const val FILENAME = "posts.json"
         private const val KEY = "posts"
         private const val ID = "id"
 
     }
 
-    private val prefs = context.getSharedPreferences("repo", Context.MODE_PRIVATE)
     private var nextId = 1L
     private var posts = listOf(
         Post(
@@ -102,12 +102,16 @@ class PostRepositoryFileImpl (context: Context) : PostRepository  {
     private val data = MutableLiveData(posts)
 
     init {
-        prefs.getString(KEY, null)?.let{
-            posts = gson.fromJson(it, token)
-            data.value = posts
-        }
-        nextId = prefs.getLong(ID, nextId)
+        val file = context.filesDir.resolve(FILENAME)
+        if (file.exists()){
+            context.openFileInput(FILENAME).bufferedReader().use {
+                posts = gson.fromJson(it, token)
+                nextId = posts.maxOf { it.id } +1
+                data.value = posts
+            }
+        }else{
         sync()
+            }
     }
 
     override fun getAll(): LiveData<List<Post>> = data
@@ -148,10 +152,8 @@ class PostRepositoryFileImpl (context: Context) : PostRepository  {
     }
 
     private fun sync() {
-        prefs.edit().apply(){
-            putString(KEY, gson.toJson(posts))
-            putLong(ID, nextId)
-            apply()
+        context.openFileOutput(FILENAME, Context.MODE_PRIVATE).bufferedWriter().use {
+            it.write(gson.toJson(posts))
         }
     }
 }

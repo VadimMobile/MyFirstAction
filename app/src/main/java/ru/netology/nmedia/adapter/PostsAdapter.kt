@@ -13,13 +13,13 @@ import ru.netology.nmedia.databinding.CardPostBinding
 import ru.netology.nmedia.dto.Post
 
 
-interface OnInteractionListener{
-    fun onLike (post: Post)
+interface OnInteractionListener {
+    fun onLike(post: Post)
     fun onShare(post: Post)
-    fun onRemove (post: Post)
-    fun onEdit (post: Post)
-    fun noEdit (post: Post)
-    fun onVideo (post: Post)
+    fun onRemove(post: Post)
+    fun onEdit(post: Post)
+    fun noEdit(post: Post)
+    fun onVideo(post: Post)
 }
 
 class PostsAdapter(
@@ -32,7 +32,7 @@ class PostsAdapter(
                 LayoutInflater.from(parent.context),
                 parent,
                 false
-            ),   OnInteractionListener
+            ), OnInteractionListener
         )
     }
 
@@ -69,7 +69,7 @@ class PostViewHolder(
             OnInteractionListener.onShare(post)
         }
 
-        playVideoGroup.setOnClickListener{
+        playVideoGroup.setOnClickListener {
             OnInteractionListener.onVideo(post)
         }
 
@@ -92,10 +92,12 @@ class PostViewHolder(
                                 OnInteractionListener.onRemove(post)
                                 true
                             }
+
                             R.id.edit -> {
                                 OnInteractionListener.onEdit(post)
                                 true
                             }
+
                             else -> false
                         }
                     } else {

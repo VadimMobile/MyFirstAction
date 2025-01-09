@@ -27,7 +27,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         val viewModel: PostViewModel by viewModels()
-        val newPostLauncher = registerForActivityResult(NewPostContract){result ->
+        val newPostLauncher = registerForActivityResult(NewPostContract) { result ->
             if (result != null) {
                 viewModel.checkContent(result)
                 viewModel.saveContent(result)
@@ -38,7 +38,7 @@ class MainActivity : AppCompatActivity() {
         }
         val adapter = PostsAdapter(object : OnInteractionListener {
             override fun onLike(post: Post) {
-               viewModel.likeById(post.id)
+                viewModel.likeById(post.id)
             }
 
             override fun onShare(post: Post) {
@@ -48,7 +48,8 @@ class MainActivity : AppCompatActivity() {
                     putExtra(Intent.EXTRA_TEXT, post.content)
                 }
 
-                val shareIntent = Intent.createChooser(intent, getString(R.string.chooser_share_post))
+                val shareIntent =
+                    Intent.createChooser(intent, getString(R.string.chooser_share_post))
 
                 startActivity(shareIntent)
             }
@@ -75,13 +76,13 @@ class MainActivity : AppCompatActivity() {
         binding.container.adapter = adapter
         viewModel.data.observe(this) { posts ->
             val new = adapter.currentList.size < posts.size
-            adapter.submitList(posts){
+            adapter.submitList(posts) {
                 if (new) {
                     binding.container.smoothScrollToPosition(0)
                 }
             }
         }
-        binding.save.setOnClickListener{
+        binding.save.setOnClickListener {
             newPostLauncher.launch(null)
         }
     }

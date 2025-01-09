@@ -10,11 +10,11 @@ import ru.netology.nmedia.repository.PostRepositoryInMemoryImpl
 import ru.netology.nmedia.repository.PostRepositorySharedPrefsImpl
 
 private val empty = Post(
-id = 0,
-author = "",
-content = "",
-published = "",
-likedByMe = false
+    id = 0,
+    author = "",
+    content = "",
+    published = "",
+    likedByMe = false
 )
 
 class PostViewModel(application: Application) : AndroidViewModel(application) {
@@ -25,7 +25,7 @@ class PostViewModel(application: Application) : AndroidViewModel(application) {
 
     private var edited = MutableLiveData(empty)
 
-    fun  saveContent(content: String) {
+    fun saveContent(content: String) {
         edited.value?.let {
             repository.save(it.copy(content = content))
         }
@@ -38,11 +38,11 @@ class PostViewModel(application: Application) : AndroidViewModel(application) {
 
     fun removeById(id: Long) = repository.removeById(id)
 
-    fun edit(post: Post){
+    fun edit(post: Post) {
         edited.value = post
     }
 
-    fun noEdit (){
+    fun noEdit() {
         edited.value = empty
     }
 

@@ -41,6 +41,8 @@ buildFeatures{
 dependencies {
 
     implementation(libs.androidx.activity)
+    implementation(libs.androidx.navigation.fragment.ktx)
+    implementation(libs.androidx.navigation.ui.ktx)
     val coreVersion = "1.15.0"
     val appcompatVersion = "1.7.0"
     val mdcVersion = "1.12.0"
@@ -52,6 +54,7 @@ dependencies {
     val activityVersion = "1.9.3"
     val lifecycleVersion = "2.8.7"
     val gsonVersion = "2.11.0"
+    val fragmentVersion = "1.8.5"
 
     implementation ("androidx.core:core-ktx:$coreVersion")
     implementation ("androidx.appcompat:appcompat:$appcompatVersion")
@@ -59,6 +62,7 @@ dependencies {
     implementation ("androidx.constraintlayout:constraintlayout:$constraintlayoutVersion")
     implementation ("androidx.recyclerview:recyclerview:$recyclerviewVersion")
     implementation ("androidx.activity:activity-ktx:$activityVersion")
+    implementation ("androidx.fragment:fragment-ktx:$fragmentVersion")
     implementation ("androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleVersion")
     implementation ("androidx.lifecycle:lifecycle-livedata-ktx:$lifecycleVersion")
     implementation ("com.google.code.gson:gson:$gsonVersion")

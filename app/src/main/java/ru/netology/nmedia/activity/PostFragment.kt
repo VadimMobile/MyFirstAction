@@ -16,7 +16,15 @@ class PostFragment : Fragment() {
         viewModel.data.observe(viewLifecycleOwner) { posts ->
             val post = posts.find { it.id == postId } ?: return@observe
             with(binding) {
-                ...
+                val id: Long = 0,
+                val share: Long = 0,
+                val likes: Long = 0,
+                val content: String = "",
+                val published: String = "",
+                val author: String = "",
+                val likedByMe: Boolean = false,
+                val sharedByMe: Boolean = false,
+                val video: String? = null,
             }
         }
     }

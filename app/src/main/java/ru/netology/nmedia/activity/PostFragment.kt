@@ -16,6 +16,7 @@ class PostFragment : Fragment() {
         viewModel.data.observe(viewLifecycleOwner) { posts ->
             val post = posts.find { it.id == postId } ?: return@observe
             with(binding) {
+                data class Post(
                 val id: Long = 0,
                 val share: Long = 0,
                 val likes: Long = 0,
@@ -25,6 +26,26 @@ class PostFragment : Fragment() {
                 val likedByMe: Boolean = false,
                 val sharedByMe: Boolean = false,
                 val video: String? = null,
+                )
+                override fun likeById(id: Long) {
+                    posts = posts.map {
+                        if (it.id != id) it else it.copy(
+                            likedByMe = !it.likedByMe,
+                            likes = if (it.likedByMe) it.likes - 1 else it.likes + 1
+                        )
+                    }
+                    data.value = posts
+                }
+
+                override fun shareById(id: Long) {
+                    posts = posts.map {
+                        if (it.id != id) it else it.copy(
+                            sharedByMe = true,
+                            share = it.share + 1
+                        )
+                    }
+                    data.value = posts
+                }
             }
         }
     }

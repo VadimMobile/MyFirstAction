@@ -30,8 +30,9 @@ class PostFragment : Fragment() {
                     share.setOnClickListener {
                         OnInteractionListener.onShare(post)
                     }
+                }
             }
         }
-    }
         return binding.root
+    }
 }

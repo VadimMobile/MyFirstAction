@@ -34,4 +34,142 @@
         <action
             android:id="@+id/action_PostFragment_to_newPostFragment"
             app:destination="@id/newPostFragment" />
+    <ImageView
+        android:id="@+id/avatar"
+        android:layout_width="48dp"
+        android:layout_height="@dimen/avatar_size"
+        android:contentDescription="@string/menu_image_description"
+        android:src="@drawable/post_avatar_drawable"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/author"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/common_spacing"
+        android:ellipsize="end"
+        android:maxLines="1"
+        app:layout_constraintBottom_toTopOf="@id/published"
+        app:layout_constraintEnd_toStartOf="@id/menu"
+        app:layout_constraintStart_toEndOf="@id/avatar"
+        app:layout_constraintTop_toTopOf="@id/avatar"
+        tools:text="@sample/posts.json/data/author" />
+
+    <TextView
+        android:id="@+id/published"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/common_spacing"
+        app:layout_constraintBottom_toBottomOf="@id/avatar"
+        app:layout_constraintEnd_toStartOf="@id/menu"
+        app:layout_constraintStart_toEndOf="@id/avatar"
+        app:layout_constraintTop_toBottomOf="@id/author"
+        tools:text="@sample/posts.json/data/published" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/menu"
+        style="@style/Widget.App.MenuButton"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:checkable="true"
+        android:contentDescription="@string/avatar_description"
+        app:icon="@drawable/baseline_more_vert_24"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:tint="?colorControlNormal" />
+
+    <androidx.constraintlayout.widget.Barrier
+        android:id="@+id/headerBarrier"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:barrierDirection="bottom"
+        app:constraint_referenced_ids="menu,avatar,published" />
+
+    <TextView
+        android:id="@+id/content"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/common_spacing"
+        android:autoLink="all"
+        app:layout_constraintTop_toBottomOf="@id/headerBarrier"
+        tools:text="@sample/posts.json/data/content" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/play_video_group"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:constraint_referenced_ids="background_video, play" />
+
+    <ImageButton
+        android:id="@+id/background_video"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:adjustViewBounds="true"
+        android:contentDescription="@string/background_video_description"
+        android:src="@drawable/background_video"
+        app:layout_constraintBottom_toTopOf="@id/headerBarrier2"
+        app:layout_constraintEnd_toEndOf="@id/play_video_group"
+        app:layout_constraintStart_toStartOf="@id/play_video_group"
+        app:layout_constraintTop_toBottomOf="@+id/content" />
+
+    <ImageButton
+        android:id="@+id/play"
+        android:layout_width="200dp"
+        android:layout_height="100dp"
+        android:background="@android:color/transparent"
+        android:contentDescription="@string/play_video_description"
+        android:src="@drawable/ic_play_video"
+        app:layout_constraintBottom_toBottomOf="@id/background_video"
+        app:layout_constraintEnd_toEndOf="@id/background_video"
+        app:layout_constraintStart_toStartOf="@id/background_video"
+        app:layout_constraintTop_toTopOf="@id/background_video" />
+
+    <androidx.constraintlayout.widget.Barrier
+        android:id="@+id/headerBarrier2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:barrierDirection="bottom"
+        app:constraint_referenced_ids="content" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/likes"
+        style="@style/Widget.App.LikedButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/common_spacing"
+        android:checkable="true"
+        android:contentDescription="@string/baseline_favorite_24_xml"
+        app:icon="@drawable/like_selector"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/headerBarrier2" />
+
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/share"
+        style="@style/Widget.App.SharedButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="@dimen/common_spacing"
+        android:checkable="true"
+        android:contentDescription="@string/baseline_share_24_xml"
+        app:icon="@drawable/baseline_share_24"
+        app:layout_constraintStart_toEndOf="@id/likes"
+        app:layout_constraintTop_toBottomOf="@id/headerBarrier2" />
+
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/views"
+        style="@style/Widget.App.ViewButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/common_spacing"
+        android:layout_marginEnd="8dp"
+        android:contentDescription="@string/baseline_visibility_24_xml"
+        app:icon="@drawable/baseline_visibility_24"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/headerBarrier2" />
+
 </navigation>

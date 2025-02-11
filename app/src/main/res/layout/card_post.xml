@@ -8,7 +8,6 @@
     android:padding="@dimen/common_spacing"
     tools:context=".activity.FeedFragment">
 
-
     <ImageView
         android:id="@+id/avatar"
         android:layout_width="48dp"

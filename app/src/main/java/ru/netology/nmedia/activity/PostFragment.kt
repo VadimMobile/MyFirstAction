@@ -5,6 +5,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
+import ru.netology.nmedia.R
 
 class PostFragment : Fragment() {
     override fun onCreateView(
@@ -32,6 +34,9 @@ class PostFragment : Fragment() {
                     }
                 }
             }
+        }
+        binding.save.setOnClickListener {
+            findNavController().navigate(R.id.action_PostFragment_to_newPostFragment)
         }
         return binding.root
     }

@@ -30,7 +30,6 @@
         <action
             android:id="@+id/action_PostFragment_to_newPostFragment4"
             app:destination="@id/newPostFragment" />
-    </fragment>
         <action
             android:id="@+id/action_PostFragment_to_newPostFragment"
             app:destination="@id/newPostFragment" />
@@ -171,5 +170,5 @@
         app:icon="@drawable/baseline_visibility_24"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/headerBarrier2" />
-
+    </fragment>
 </navigation>

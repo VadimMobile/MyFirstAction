@@ -7,6 +7,11 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import ru.netology.nmedia.R
+import androidx.fragment.app.viewModels
+import ru.netology.nmedia.Utils
+import ru.netology.nmedia.databinding.FragmentPostBinding
+import ru.netology.nmedia.util.StringArg
+import ru.netology.nmedia.viewmodel.PostViewModel
 
 class PostFragment : Fragment() {
     override fun onCreateView(

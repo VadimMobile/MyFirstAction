@@ -13,31 +13,32 @@ class PostFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        val postId = arguments?.idArg ?: -1
+    ): View {
+        val binding = FragmentPostBinding.inflate(inflater, container, false)
+        val viewModel: PostViewModel by viewModels(ownerProducer = ::requireParentFragment)
+        val postId = arguments?.idArg?.toLongOrNull() ?: -1L
         viewModel.data.observe(viewLifecycleOwner) { posts ->
             val post = posts.find { it.id == postId } ?: return@observe
             with(binding) {
-                author = post.author
-                published = post.published
-                content = post.content
-                likes = post.likedByMe
-                likes = post.likes.toString()
-                share = post.sharedByMe
-                share = !post.sharedByMe
-                override fun likeById(id: Long) {
-                    likes.setOnClickListener {
-                        OnInteractionListener.onLike(post)
-                    }
-                    share.setOnClickListener {
-                        OnInteractionListener.onShare(post)
-                    }
+                author.text = post.author
+                published.text = post.published
+                content.text = post.content
+                likes.isChecked = post.likedByMe
+                likes.text = Utils.formatCounter(post.likes)
+                share.text = Utils.formatCounter(post.share)
+                share.isChecked = !post.sharedByMe
+                likes.setOnClickListener {
+                    viewModel.likeById(post.id)
+                }
+                share.setOnClickListener {
+                    viewModel.shareById(post.id)
                 }
             }
         }
-        binding.save.setOnClickListener {
-            findNavController().navigate(R.id.action_PostFragment_to_newPostFragment)
-        }
         return binding.root
+    }
+
+    companion object{
+        var Bundle.idArg by StringArg
     }
 }

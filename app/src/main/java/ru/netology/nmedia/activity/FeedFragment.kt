@@ -47,11 +47,6 @@ class FeedFragment : Fragment() {
                 startActivity(shareIntent)
             }
 
-            override fun onPost(post: Post) {
-                findNavController().navigate(R.id.action_feedFragment_to_PostFragment2,
-                    Bundle().apply { idArg = post.id.toString() })
-            }
-
             override fun onRemove(post: Post) {
                 viewModel.removeById(post.id)
             }
@@ -67,6 +62,11 @@ class FeedFragment : Fragment() {
             override fun onVideo(post: Post) {
                 val intentVideo = Intent(Intent.ACTION_VIEW, Uri.parse(post.video))
                 startActivity(intentVideo)
+            }
+
+            override fun onPost(post: Post) {
+                findNavController().navigate(R.id.action_feedFragment_to_PostFragment2,
+                    Bundle().apply { idArg = post.id.toString() })
             }
 
         })

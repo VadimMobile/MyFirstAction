@@ -15,19 +15,19 @@ import ru.netology.nmedia.dto.Post
 import ru.netology.nmedia.viewmodel.PostViewModel
 import ru.netology.nmedia.R
 import ru.netology.nmedia.activity.NewPostFragment.Companion.textArg
+import ru.netology.nmedia.activity.PostFragment.Companion.idArg
 import ru.netology.nmedia.adapter.OnInteractionListener
 import ru.netology.nmedia.databinding.FragmentFeedBinding
 
 
 class FeedFragment : Fragment() {
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-val binding = FragmentFeedBinding.inflate(inflater, container, false)
-        val viewModel: PostViewModel by viewModels(ownerProducer = :: requireParentFragment)
+        val binding = FragmentFeedBinding.inflate(inflater, container, false)
+        val viewModel: PostViewModel by viewModels(ownerProducer = ::requireParentFragment)
 
         val adapter = PostsAdapter(object : OnInteractionListener {
             override fun onLike(post: Post) {
@@ -45,6 +45,11 @@ val binding = FragmentFeedBinding.inflate(inflater, container, false)
                     Intent.createChooser(intent, getString(R.string.chooser_share_post))
 
                 startActivity(shareIntent)
+            }
+
+            override fun onPost(post: Post) {
+                findNavController().navigate(R.id.action_feedFragment_to_PostFragment2,
+                    Bundle().apply { idArg = post.id.toString() })
             }
 
             override fun onRemove(post: Post) {

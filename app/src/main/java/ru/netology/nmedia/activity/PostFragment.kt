@@ -47,12 +47,11 @@ class PostFragment : Fragment() {
                     Bundle().apply { textArg = it.content })
             }
         }
-        binding.save.setOnClickListener {
+        binding.root.setOnClickListener {
             findNavController().navigate(R.id.action_PostFragment_to_newPostFragment4)
         }
         return binding.root
     }
-
     companion object{
         var Bundle.idArg by StringArg
     }

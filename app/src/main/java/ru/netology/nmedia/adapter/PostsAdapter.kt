@@ -20,6 +20,7 @@ interface OnInteractionListener {
     fun onEdit(post: Post)
     fun noEdit(post: Post)
     fun onVideo(post: Post)
+    fun onPost(post: Post) {}
 }
 
 class PostsAdapter(
@@ -54,7 +55,9 @@ class PostViewHolder(
         likes.text = post.likes.toString()
         share.isChecked = post.sharedByMe
         share.isCheckable = !post.sharedByMe
-
+        root.setOnClickListener {
+            OnInteractionListener.onPost(post)
+        }
         if (post.video == null) {
             binding.playVideoGroup.visibility = View.GONE
         } else {

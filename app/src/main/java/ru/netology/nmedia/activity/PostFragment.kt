@@ -9,6 +9,7 @@ import androidx.navigation.fragment.findNavController
 import ru.netology.nmedia.R
 import androidx.fragment.app.viewModels
 import ru.netology.nmedia.Utils
+import ru.netology.nmedia.activity.NewPostFragment.Companion.textArg
 import ru.netology.nmedia.databinding.FragmentPostBinding
 import ru.netology.nmedia.util.StringArg
 import ru.netology.nmedia.viewmodel.PostViewModel
@@ -39,6 +40,15 @@ class PostFragment : Fragment() {
                     viewModel.shareById(post.id)
                 }
             }
+        }
+        viewModel.edited.observe(viewLifecycleOwner) {
+            if (it.id != 0L) {
+                findNavController().navigate(R.id.action_feedFragment_to_newPostFragment,
+                    Bundle().apply { textArg = it.content })
+            }
+        }
+        binding.save.setOnClickListener {
+            findNavController().navigate(R.id.action_PostFragment_to_newPostFragment4)
         }
         return binding.root
     }

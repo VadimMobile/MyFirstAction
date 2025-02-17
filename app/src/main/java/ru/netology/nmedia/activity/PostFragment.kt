@@ -49,7 +49,6 @@ class PostFragment : Fragment() {
                 menu.setOnClickListener {
                     var isMenuValid = false
                     menu.postDelayed({ isMenuValid = true }, 500) // Разрешить действия через 0.5 секунды
-
                     PopupMenu(it.context, it).apply {
                         inflate(R.menu.menu_options)
                         setOnMenuItemClickListener { item ->
@@ -83,9 +82,6 @@ class PostFragment : Fragment() {
                 findNavController().navigate(R.id.action_PostFragment_to_newPostFragment,
                     Bundle().apply { textArg = it.content })
             }
-        }
-        binding.root.setOnClickListener {
-            findNavController().navigate(R.id.action_PostFragment_to_newPostFragment4)
         }
         return binding.root
     }

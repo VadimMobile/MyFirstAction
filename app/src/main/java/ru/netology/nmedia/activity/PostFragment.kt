@@ -28,6 +28,11 @@ class PostFragment : Fragment() {
         viewModel.data.observe(viewLifecycleOwner) { posts ->
             val post = posts.find { it.id == postId } ?: return@observe
             with(binding) {
+                if (post.video == null) {
+                    binding.playVideoGroup.visibility = View.GONE
+                } else {
+                    binding.playVideoGroup.visibility = View.VISIBLE
+                }
                 author.text = post.author
                 published.text = post.published
                 content.text = post.content
@@ -51,6 +56,7 @@ class PostFragment : Fragment() {
                             if (isMenuValid) {
                                 when (item.itemId) {
                                     R.id.remove -> {
+                                        findNavController().navigateUp()
                                         viewModel.removeById(post.id)
                                         true
                                     }
@@ -70,10 +76,11 @@ class PostFragment : Fragment() {
                     }.show()
                 }
             }
+
         }
         viewModel.edited.observe(viewLifecycleOwner) {
             if (it.id != 0L) {
-                findNavController().navigate(R.id.action_feedFragment_to_newPostFragment,
+                findNavController().navigate(R.id.action_PostFragment_to_newPostFragment,
                     Bundle().apply { textArg = it.content })
             }
         }

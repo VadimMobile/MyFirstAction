@@ -86,7 +86,6 @@ class FeedFragment : Fragment() {
 
             }
         }
-
         binding.save.setOnClickListener {
             findNavController().navigate(R.id.action_feedFragment_to_newPostFragment)
         }

@@ -44,10 +44,11 @@ class PostRepositorySQLiteImpl(
 
 
     override fun shareById(id: Long) {
+        dao.shareById(id)
         posts = posts.map {
             if (it.id != id) it else it.copy(
                 sharedByMe = !it.sharedByMe,
-                shareCount = it.shareCount + 1
+                share = it.share + 1
             )
         }
         data.value = posts

@@ -2,6 +2,7 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.kapt)
+
 }
 
 android {
@@ -69,7 +70,7 @@ dependencies {
     implementation ("androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleVersion")
     implementation ("androidx.lifecycle:lifecycle-livedata-ktx:$lifecycleVersion")
     implementation ("com.google.code.gson:gson:$gsonVersion")
-    implementation("androidx.room:room-compiler:$roomVersion")
+    implementation("androidx.room:room-runtime:$roomVersion")
     kapt("androidx.room:room-compiler:$roomVersion")
 
     testImplementation ("junit:junit:$junitVersion")

@@ -1,5 +1,6 @@
 package ru.netology.nmedia.entity
 
+import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import ru.netology.nmedia.dto.Post
@@ -8,6 +9,7 @@ import ru.netology.nmedia.dto.Post
 data class PostEntity (
     @PrimaryKey(autoGenerate = true)
     val id: Long = 0,
+    @ColumnInfo
     val share: Long = 0,
     val likes: Long = 0,
     val content: String = "",
@@ -20,8 +22,9 @@ data class PostEntity (
     fun toDto() = Post(id, author, content, published, likedByMe, likes)
 
     companion object {
-        fun fromDto(dto: Post) =
-            PostEntity(dto.id, dto.author, dto.content, dto.published, dto.likedByMe, dto.likes)
+        fun fromDto(post: Post) = PostEntity(post.id, post.author, post.content,
+            post.published, post.likedByMe, post.likes.toString()
+        )
 
     }
 }

@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.kotlin.kapt)
 }
 
 android {
@@ -43,6 +44,7 @@ dependencies {
     implementation(libs.androidx.activity)
     implementation(libs.androidx.navigation.fragment.ktx)
     implementation(libs.androidx.navigation.ui.ktx)
+    implementation(libs.androidx.room.common)
     val coreVersion = "1.15.0"
     val appcompatVersion = "1.7.0"
     val mdcVersion = "1.12.0"
@@ -55,6 +57,7 @@ dependencies {
     val lifecycleVersion = "2.8.7"
     val gsonVersion = "2.11.0"
     val fragmentVersion = "1.8.5"
+    val roomVersion = "2.6.1"
 
     implementation ("androidx.core:core-ktx:$coreVersion")
     implementation ("androidx.appcompat:appcompat:$appcompatVersion")
@@ -66,6 +69,8 @@ dependencies {
     implementation ("androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleVersion")
     implementation ("androidx.lifecycle:lifecycle-livedata-ktx:$lifecycleVersion")
     implementation ("com.google.code.gson:gson:$gsonVersion")
+    implementation("androidx.room:room-compiler:$roomVersion")
+    kapt("androidx.room:room-compiler:$roomVersion")
 
     testImplementation ("junit:junit:$junitVersion")
     androidTestImplementation ("androidx.test.ext:junit:$extJunitVersion")

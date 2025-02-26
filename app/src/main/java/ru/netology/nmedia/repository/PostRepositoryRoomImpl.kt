@@ -14,10 +14,9 @@ class PostRepositoryRoomImpl(
 
     override fun likeById(id: Long) = dao.likeById(id)
 
-
     override fun save(post: Post) = dao.save(PostEntity.fromDto(post))
-
 
     override fun removeById(id: Long) = dao.removeById(id)
 
+    override fun shareById(id: Long) = dao.shareById(id)
 }

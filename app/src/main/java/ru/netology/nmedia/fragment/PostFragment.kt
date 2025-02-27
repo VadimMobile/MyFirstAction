@@ -1,5 +1,6 @@
 package ru.netology.nmedia.fragment
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -44,6 +45,16 @@ class PostFragment : Fragment() {
                 }
                 share.setOnClickListener {
                     viewModel.shareById(post.id)
+                    val intent = Intent().apply {
+                        action = Intent.ACTION_SEND
+                        type = "text/plain"
+                        putExtra(Intent.EXTRA_TEXT, post.content)
+                    }
+
+                    val shareIntent =
+                        Intent.createChooser(intent, getString(R.string.chooser_share_post))
+
+                    startActivity(shareIntent)
                 }
                 menu.setOnClickListener {
                     var isMenuValid = false

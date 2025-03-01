@@ -2,6 +2,7 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.kapt)
+    id("com.google.gms.google-services")
 
 }
 
@@ -59,6 +60,9 @@ dependencies {
     val gsonVersion = "2.11.0"
     val fragmentVersion = "1.8.5"
     val roomVersion = "2.6.1"
+    val firebaseVersion = "33.10.0"
+
+
 
     implementation ("androidx.core:core-ktx:$coreVersion")
     implementation ("androidx.appcompat:appcompat:$appcompatVersion")
@@ -72,6 +76,9 @@ dependencies {
     implementation ("com.google.code.gson:gson:$gsonVersion")
     implementation("androidx.room:room-runtime:$roomVersion")
     kapt("androidx.room:room-compiler:$roomVersion")
+    implementation(platform("com.google.firebase:firebase-bom:$firebaseVersion"))
+    implementation("com.google.firebase:firebase-messaging-ktx")
+
 
     testImplementation ("junit:junit:$junitVersion")
     androidTestImplementation ("androidx.test.ext:junit:$extJunitVersion")

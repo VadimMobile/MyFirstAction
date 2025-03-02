@@ -18,4 +18,6 @@
     <string name="chooser_share_post">Поделиться постом</string>
     <string name="play_video_description">Воспроизведение видео</string>
     <string name="background_video_description">Заставка видео</string>
+    <string name="channel_remote_name">Server notifications</string>
+    <string name="channel_remote_description">Notifications from remote server</string>
 </resources>

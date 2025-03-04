@@ -47,15 +47,13 @@ class FCMService : FirebaseMessagingService() {
                     }
 
                 }
-
-                else -> {
-                    Action.POST -> {
-                        gson.fromJson(messageLike.data[keyContent], Like::class.java).let { content ->
-                            handleLike(content)
-                        }
-
+                Action.POST -> {
+                    gson.fromJson(messageLike.data[keyContent], Post::class.java).let { content ->
+                        handlePost(content)
                     }
+
                 }
+
             }
         }
     }
@@ -95,8 +93,9 @@ class FCMService : FirebaseMessagingService() {
             .setSmallIcon(R.drawable.ic_launcher_foreground)
             .setContentTitle(
                 getString(
-                    R.string.notification_user_liked,
+                    R.string.notification_user_post,
                     content.postAuthor,
+                    content.postContent,
                 )
             )
             .setPriority(NotificationCompat.PRIORITY_DEFAULT)

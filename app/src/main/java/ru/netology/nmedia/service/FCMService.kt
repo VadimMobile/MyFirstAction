@@ -1,6 +1,7 @@
 package ru.netology.nmedia.service
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.app.Notification
 import android.app.NotificationChannel
 import android.app.NotificationManager
@@ -37,18 +38,29 @@ class FCMService : FirebaseMessagingService() {
             .apply()
     }
 
-    override fun onMessageReceived(message: RemoteMessage) {
-        message.data[keyAction]?.let { action ->
+    override fun onMessageReceived(messageLike: RemoteMessage) {
+        messageLike.data[keyAction]?.let { action ->
             when (Action.valueOf(action)) {
-                Action.LIKE -> { gson.fromJson(message.data[keyContent], Like::class.java).let {content->
-                       handleLike(content) }
+                Action.LIKE -> {
+                    gson.fromJson(messageLike.data[keyContent], Like::class.java).let { content ->
+                        handleLike(content)
+                    }
 
+                }
+
+                else -> {
+                    Action.POST -> {
+                        gson.fromJson(messageLike.data[keyContent], Like::class.java).let { content ->
+                            handleLike(content)
+                        }
+
+                    }
                 }
             }
         }
     }
 
-    private fun registerChannel(){
+    private fun registerChannel() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val name = getString(R.string.channel_remote_name)
             val descriptionText = getString(R.string.channel_remote_description)
@@ -77,6 +89,22 @@ class FCMService : FirebaseMessagingService() {
         notify(notification)
     }
 
+    @SuppressLint("StringFormatMatches")
+    private fun handlePost(content: Post) {
+        val notification = NotificationCompat.Builder(this, channelId)
+            .setSmallIcon(R.drawable.ic_launcher_foreground)
+            .setContentTitle(
+                getString(
+                    R.string.notification_user_liked,
+                    content.postAuthor,
+                )
+            )
+            .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+            .build()
+
+        notify(notification)
+    }
+
     private fun notify(notification: Notification) {
         if (
             Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU ||
@@ -91,7 +119,7 @@ class FCMService : FirebaseMessagingService() {
 }
 
 enum class Action {
-    LIKE
+    LIKE, POST
 }
 
 data class Like(
@@ -99,4 +127,10 @@ data class Like(
     val userName: String,
     val postId: Long,
     val postAuthor: String,
+)
+
+data class Post(
+    val postId: Long,
+    val postAuthor: String,
+    val postContent: String
 )

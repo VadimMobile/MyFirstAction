@@ -39,22 +39,30 @@ class FCMService : FirebaseMessagingService() {
     }
 
     override fun onMessageReceived(messageLike: RemoteMessage) {
-        messageLike.data[keyAction]?.let { action ->
-            when (Action.valueOf(action)) {
-                Action.LIKE -> {
-                    gson.fromJson(messageLike.data[keyContent], Like::class.java).let { content ->
-                        handleLike(content)
+        try {
+
+            messageLike.data[keyAction]?.let { action ->
+                when (Action.valueOf(action)) {
+                    Action.LIKE -> {
+                        gson.fromJson(messageLike.data[keyContent], Like::class.java)
+                            .let { content ->
+                                handleLike(content)
+                            }
+
+                    }
+
+                    Action.POST -> {
+                        gson.fromJson(messageLike.data[keyContent], Post::class.java)
+                            .let { content ->
+                                handlePost(content)
+                            }
+
                     }
 
                 }
-                Action.POST -> {
-                    gson.fromJson(messageLike.data[keyContent], Post::class.java).let { content ->
-                        handlePost(content)
-                    }
-
-                }
-
             }
+        }catch(e: IllegalArgumentException) {
+            println("Ошибка")
         }
     }
 

@@ -7,15 +7,14 @@ import com.google.gson.reflect.TypeToken
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
 import okhttp3.Request
+import okhttp3.RequestBody.Companion.toRequestBody
 import ru.netology.nmedia.dao.PostDao
 import ru.netology.nmedia.dto.Post
 import ru.netology.nmedia.entity.PostEntity
 import java.util.concurrent.TimeUnit
 import kotlin.time.Duration.Companion.seconds
 
-class PostRepositoryRoomImpl(
-    private val dao: PostDao
-) : PostRepository {
+class PostRepositoryRoomImpl: PostRepository {
 
     private companion object {
         const val BASE_URL = "http://10.0.2.2:9999"
@@ -41,15 +40,28 @@ class PostRepositoryRoomImpl(
 
        val responseBody = requireNotNull(response.body) {"Body is null"}
 
-        return gson.fromJson<List<Post>>(responseBody.string(), postsType)
+        return gson.fromJson(responseBody.string(), postsType)
 
     }
 
-    override fun likeById(id: Long) = dao.likeById(id)
+    override fun likeById(id: Long) = TODO()
 
-    override fun save(post: Post) = dao.save(PostEntity.fromDto(post))
+    override fun save(post: Post): Post{
+        val request = Request.Builder()
+            .post(gson.toJson(post, Post::class.java).toRequestBody(jsonType))
+            .url("${BASE_URL}api/slow/posts")
+            .build()
 
-    override fun removeById(id: Long) = dao.removeById(id)
+        val call = client.newCall(request)
 
-    override fun shareById(id: Long) = dao.shareById(id)
+        val response = call.execute()
+
+        val responseBody = requireNotNull(response.body) {"Body is null"}
+
+        return gson.fromJson(responseBody.string(), Post::class.java)
+    }
+
+    override fun removeById(id: Long) = TODO()
+
+    override fun shareById(id: Long) = TODO()
 }

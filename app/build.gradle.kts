@@ -30,7 +30,7 @@ android {
             manifestPlaceholders["usesCleartextTraffic"] = false
         }
         debug {
-            manifestPlaceholders["usesCleartextTraffic"] = true
+            manifestPlaceholders["usesCleartextTraffic"]  = true
         }
     }
     compileOptions {

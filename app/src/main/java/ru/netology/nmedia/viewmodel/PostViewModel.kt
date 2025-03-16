@@ -2,12 +2,14 @@ package ru.netology.nmedia.viewmodel
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import ru.netology.nmedia.db.AppDb
 import ru.netology.nmedia.dto.Post
+import ru.netology.nmedia.model.FeedModel
 import ru.netology.nmedia.repository.PostRepository
 import ru.netology.nmedia.repository.PostRepositoryRoomImpl
+import kotlin.concurrent.thread
 
 private val empty = Post(
     id = 0,
@@ -19,19 +21,35 @@ private val empty = Post(
 
 class PostViewModel(application: Application) : AndroidViewModel(application) {
 
-    private val repository: PostRepository = PostRepositoryRoomImpl(
-        AppDb.getInstance(application).postDao()
-    )
-
-    val data = repository.getAll()
-
+    private val repository: PostRepository = PostRepositoryRoomImpl()
+    private val _data = MutableLiveData(FeedModel())
+    val data: LiveData<FeedModel> = _data
     var edited = MutableLiveData(empty)
 
+    init {
+        load()
+    }
+
     fun saveContent(content: String) {
-        edited.value?.let {
-            repository.save(it.copy(content = content))
+        thread {
+            edited.value?.let {
+                repository.save(it.copy(content = content))
+            }
+            edited.postValue(empty)
         }
-        edited.value = empty
+    }
+
+    fun load() {
+        thread {
+            _data.postValue(FeedModel(loading = true))
+          try {
+               val posts = repository.getAll()
+
+                FeedModel(posts = posts, empty = posts.isEmpty())
+            } catch (_: Exception){
+                FeedModel(error = true)
+            }.also(_data::postValue)
+        }
     }
 
     fun likeById(id: Long) = repository.likeById(id)

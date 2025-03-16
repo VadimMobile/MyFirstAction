@@ -17,7 +17,7 @@ import kotlin.time.Duration.Companion.seconds
 class PostRepositoryRoomImpl: PostRepository {
 
     private companion object {
-        const val BASE_URL = "http://10.0.2.2:9999"
+        const val BASE_URL = "http://10.0.2.2:9999/"
         val  jsonType = "application/json".toMediaType()
     }
 
@@ -61,7 +61,16 @@ class PostRepositoryRoomImpl: PostRepository {
         return gson.fromJson(responseBody.string(), Post::class.java)
     }
 
-    override fun removeById(id: Long) = TODO()
+    override fun removeById(id: Long) {
+        val request = Request.Builder()
+            .delete()
+            .url("${BASE_URL}api/slow/posts/$id")
+            .build()
+
+        val call = client.newCall(request)
+
+        call.execute()
+    }
 
     override fun shareById(id: Long) = TODO()
 }

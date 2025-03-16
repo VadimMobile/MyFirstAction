@@ -9,6 +9,7 @@ import ru.netology.nmedia.dto.Post
 import ru.netology.nmedia.model.FeedModel
 import ru.netology.nmedia.repository.PostRepository
 import ru.netology.nmedia.repository.PostRepositoryRoomImpl
+import ru.netology.nmedia.util.SingleLiveEvent
 import kotlin.concurrent.thread
 
 private val empty = Post(
@@ -26,6 +27,9 @@ class PostViewModel(application: Application) : AndroidViewModel(application) {
     val data: LiveData<FeedModel> = _data
     var edited = MutableLiveData(empty)
 
+    private val _postCreated = SingleLiveEvent<Unit>()
+    val postCreated: LiveData<Unit> = _postCreated
+
     init {
         load()
     }
@@ -34,6 +38,7 @@ class PostViewModel(application: Application) : AndroidViewModel(application) {
         thread {
             edited.value?.let {
                 repository.save(it.copy(content = content))
+                _postCreated.postValue(Unit)
             }
             edited.postValue(empty)
         }
@@ -52,9 +57,30 @@ class PostViewModel(application: Application) : AndroidViewModel(application) {
         }
     }
 
-    fun likeById(id: Long) = repository.likeById(id)
+    fun likeById(id: Long) {
+        thread {
+            repository.likeById(id)
+        }
+    }
 
-    fun removeById(id: Long) = repository.removeById(id)
+    fun removeById(id: Long){
+        thread {
+            val oldState = _data.value
+
+            val updatePosts = _data.value?.posts.orEmpty().filter {
+                it.id != id
+            }
+
+            _data.postValue(FeedModel(posts = updatePosts))
+
+            try {
+                repository.removeById(id)
+            } catch (_: Exception){
+                _data.postValue(oldState)
+            }
+        }
+    }
+
 
     fun shareById(id: Long) = repository.shareById(id)
 

@@ -25,8 +25,8 @@ class PostFragment : Fragment() {
         val binding = FragmentPostBinding.inflate(inflater, container, false)
         val viewModel: PostViewModel by viewModels(ownerProducer = ::requireParentFragment)
         val postId = arguments?.idArg?.toLongOrNull() ?: -1L
-        viewModel.data.observe(viewLifecycleOwner) { posts ->
-            val post = posts.find { it.id == postId } ?: return@observe
+        viewModel.data.observe(viewLifecycleOwner) { feedModel ->
+            val post = feedModel.posts.find { it.id == postId } ?: return@observe
             with(binding) {
                 if (post.video == null) {
                     binding.playVideoGroup.visibility = View.GONE

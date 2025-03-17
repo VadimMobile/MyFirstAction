@@ -44,7 +44,17 @@ class PostRepositoryRoomImpl: PostRepository {
 
     }
 
-    override fun likeById(id: Long) = TODO()
+    override fun likeById(id: Long) {
+        val request = Request.Builder()
+            .post(gson.toJson(likeById(id), Post::class.java).toRequestBody(jsonType))
+            .delete(gson.toJson(likeById(id), Post::class.java).toRequestBody(jsonType))
+            .url("${BASE_URL}/api/posts/{id}/likes")
+            .build()
+
+        val call = client.newCall(request)
+
+        call.execute()
+    }
 
     override fun save(post: Post): Post{
         val request = Request.Builder()

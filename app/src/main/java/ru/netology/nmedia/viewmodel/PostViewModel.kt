@@ -59,7 +59,15 @@ class PostViewModel(application: Application) : AndroidViewModel(application) {
 
     fun likeById(id: Long) {
         thread {
-            repository.likeById(id)
+            val updatePosts = _data.value?.posts.orEmpty().filter {
+                it.id != id
+            }
+
+            if (post.id == id) {
+                post.copy(isLiked = !post.isLiked)
+            }
+
+            _data.postValue(FeedModel(posts = updatePosts))
         }
     }
 

@@ -59,6 +59,8 @@ class PostViewModel(application: Application) : AndroidViewModel(application) {
 
     fun likeById(id: Long) {
         thread {
+            val oldPost = data.value?.posts?.find { it.id == id } ?: return@thread
+            val newPostState = repository.likeById(oldPost)
             val updatedPosts = _data.value?.posts.orEmpty().map { post ->
                 if (post.id == id) {
                     post.copy(likedByMe = !post.likedByMe)
@@ -67,7 +69,14 @@ class PostViewModel(application: Application) : AndroidViewModel(application) {
                 }
             }
 
-            _data.postValue(FeedModel(posts = updatedPosts))
+            val finalUpdatedPosts = updatedPosts.map { post ->
+                if (post.id == id) {
+                    post.copy(likes = newPostState.likes)
+                } else {
+                    post
+                }
+            }
+            _data.postValue(FeedModel(posts = finalUpdatedPosts))
         }
     }
 

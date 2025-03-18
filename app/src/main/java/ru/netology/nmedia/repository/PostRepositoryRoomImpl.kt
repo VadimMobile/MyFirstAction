@@ -44,11 +44,11 @@ class PostRepositoryRoomImpl: PostRepository {
 
     }
 
-    override fun likeById(post: Post) {
+    override fun likeById(post: Post): Post {
+        val method = if (post.likedByMe) "DELETE" else "POST"
         val request = Request.Builder()
-            .post(gson.toJson(likeById(post), Post::class.java).toRequestBody(jsonType))
-            .delete(gson.toJson(likeById(post), Post::class.java).toRequestBody(jsonType))
-            .url("${BASE_URL}/api/posts/{id}/likes")
+            .method(method, gson.toJson(post, Post::class.java).toRequestBody(jsonType))
+            .url("${BASE_URL}api/posts/${post.id}/likes")
             .build()
 
         val call = client.newCall(request)
@@ -57,7 +57,7 @@ class PostRepositoryRoomImpl: PostRepository {
 
         val responseBody = requireNotNull(response.body) {"Body is null"}
 
-        return gson.fromJson(responseBody.string(), postsType)
+        return gson.fromJson(responseBody.string(), Post::class.java)
     }
 
     override fun save(post: Post): Post{

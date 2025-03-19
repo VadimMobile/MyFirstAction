@@ -121,8 +121,7 @@ class PostRepositoryRoomImpl: PostRepository {
 
                 override fun onResponse(call: Call, response: Response) {
                     try {
-                        val post = client.newCall(request)
-                        callback.onSuccess(gson.fromJson(post, Post::class.java))
+                        callback.onSuccess(0)
                     } catch (e: Exception) {
                         callback.onError(e)
                     }

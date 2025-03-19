@@ -75,8 +75,8 @@ class PostViewModel(application: Application) : AndroidViewModel(application) {
                 repository.save(it.copy(content = content))
                 _postCreated.postValue(Unit)
             }
-        repository.saveAsync(object : PostRepository.SaveCallback {
-            override fun onSuccess(posts: Post) {
+        repository.saveAsync(content, object : PostRepository.SaveCallback {
+            override fun onSuccess(post: Post) {
                 _data.postValue(repository.save(Post))
             }
 
@@ -89,18 +89,17 @@ class PostViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     fun likeById(id: Long) {
-            val oldPost = data.value?.posts?.find { it.id == id }
-            val newPostState = oldPost?.let { repository.likeById(it) }
-            val updatedPosts = _data.value?.posts.orEmpty().map { post ->
-                if (post.id == id) {
-                    newPostState
-                } else {
-                    post
-                }
-            }
-        repository.likeByIdAsync(object : PostRepository.LikeByIdCallback {
-            override fun onSuccess(posts: Post) {
-                _data.postValue(repository.likeById(id))
+            val oldPost = data.value?.posts?.find { it.id == id } ?: return
+        repository.likeByIdAsync(oldPost, object : PostRepository.LikeByIdCallback {
+            override fun onSuccess(post: Post) {
+                _data.postValue(
+                    FeedModel(
+                        posts = _data.value?.posts.orEmpty().map { 
+                            if (it.id == id) post
+                            else it
+                        }                  
+                    )
+                )
             }
 
             override fun onError(e: Exception) {
@@ -110,12 +109,13 @@ class PostViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     fun removeById(id: Long){
+
         val updatePosts = _data.value?.posts.orEmpty().filter {
             it.id != id
         }
 
         _data.postValue(FeedModel(posts = updatePosts))
-        repository.removeByIdAsync(object : PostRepository.RemoveByIdCallback {
+        repository.removeByIdAsync(updatePosts, object : PostRepository.RemoveByIdCallback {
             override fun onSuccess(id: Long) {
                 _data.postValue(repository.removeById(id))
             }

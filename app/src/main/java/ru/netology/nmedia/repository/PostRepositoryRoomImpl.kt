@@ -56,7 +56,7 @@ class PostRepositoryRoomImpl: PostRepository {
     }
 
 
-    override fun likeByIdAsync(callback: PostRepository.GetAllCallback) {
+    override fun likeByIdAsync(post: Post, callback: PostRepository.LikeByIdCallback) {
         val method = if (post.likedByMe) "DELETE" else "POST"
         val request = Request.Builder()
             .method(method, gson.toJson(post, Post::class.java).toRequestBody(jsonType))
@@ -82,7 +82,7 @@ class PostRepositoryRoomImpl: PostRepository {
 
     }
 
-    override fun saveAsync(callback: PostRepository.GetAllCallback) {
+    override fun saveAsync(post: Post, callback: PostRepository.SaveCallback) {
         val request = Request.Builder()
             .post(gson.toJson(post, Post::class.java).toRequestBody(jsonType))
             .url("${BASE_URL}api/slow/posts")
@@ -107,7 +107,7 @@ class PostRepositoryRoomImpl: PostRepository {
 
     }
 
-    override fun removeByIdAsync(callback: PostRepository.GetAllCallback) {
+    override fun removeByIdAsync(id: Long, callback: PostRepository.RemoveByIdCallback) {
         val request = Request.Builder()
             .delete()
             .url("${BASE_URL}api/slow/posts/$id")

@@ -18,23 +18,22 @@ class NewPostFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val binding = FragmentNewPostBinding.inflate(inflater, container, false)
-        val viewModel: PostViewModel by viewModels(ownerProducer = :: requireParentFragment)
+        val viewModel: PostViewModel by viewModels(ownerProducer = ::requireParentFragment)
         arguments?.textArg?.let { binding.edit.setText(it) }
         binding.edit.requestFocus()
-        binding.ok.setOnClickListener{
+        binding.ok.setOnClickListener {
             val text = binding.edit.text.toString()
             if (text.isNotBlank()) {
                 viewModel.saveContent(text)
             }
         }
         viewModel.postCreated.observe(viewLifecycleOwner) {
-            viewModel.load()
             findNavController().navigateUp()
         }
         return binding.root
     }
 
-    companion object{
+    companion object {
         var Bundle.textArg by StringArg
     }
 

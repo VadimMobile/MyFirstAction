@@ -82,6 +82,7 @@ dependencies {
     kapt("androidx.room:room-compiler:$roomVersion")
     implementation(platform("com.google.firebase:firebase-bom:$firebaseVersion"))
     implementation("com.google.firebase:firebase-messaging-ktx")
+    implementation ("com.github.bumptech.glide:glide:4.14.2")
 
     // define a BOM and its version
     implementation(platform("com.squareup.okhttp3:okhttp-bom:4.12.0"))
@@ -93,4 +94,5 @@ dependencies {
     testImplementation ("junit:junit:$junitVersion")
     androidTestImplementation ("androidx.test.ext:junit:$extJunitVersion")
     androidTestImplementation ("androidx.test.espresso:espresso-core:$espressoCoreVersion")
+    annotationProcessor ("com.github.bumptech.glide:compiler:4.14.2")
 }

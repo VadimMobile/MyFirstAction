@@ -51,25 +51,14 @@ class PostViewHolder(
     private val urls: List<String> = listOf("netology.jpg", "sber.jpg", "tcs.jpg", "404.png"),
     private var index: Int = 0
 ) : RecyclerView.ViewHolder(binding.root) {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        val binding = PostViewHolder.inflate(layoutInflater)
-        setContentView(binding.root)
 
-        binding.load.setOnClickListener {
-            if (index == urls.size) {
-                index = 0
-            }
-
-            val url = "http://10.0.2.2:9999/avatars/${urls[index++]}"
-            Glide.with(binding.image)
-                .load(url)
-                .placeholder(R.drawable.ic_loading_100dp)
-                .error(R.drawable.ic_error_100dp)
-                .timeout(10_000)
-                .into(binding.image)
+    init {
+        val url = "http://10.0.2.2:9999/avatars/${urls[index++]}"
+        Glide.with(binding.avatar)
+            .load(url)
+            .into(binding.avatar)
     }
-        }
+
     fun bind(post: Post) = with(binding) {
         author.text = post.author
         published.text = post.published

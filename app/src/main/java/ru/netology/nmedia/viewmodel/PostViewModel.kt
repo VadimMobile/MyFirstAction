@@ -54,7 +54,9 @@ class PostViewModel(application: Application) : AndroidViewModel(application) {
             object : PostRepository.SaveCallback {
                 override fun onSuccess(post: Post) {
                     val oldPosts = _data.value?.posts.orEmpty()
-                    val updatedPosts = oldPosts.map { if (it.id == post.id) post else it }
+                    val updatedPosts = if (oldPosts.map { it.id }.contains(post.id)) // Проверяем есть ли пост с таким id в списке
+                        oldPosts.map { if (it.id == post.id) post else it } // Если есть, то меняем
+                    else listOf(post) + oldPosts // иначе - добавляем в начало
                     _data.postValue(FeedModel(posts = updatedPosts))
                     _postCreated.postValue(Unit) // уведомляем о том, что данные получены
                 }

@@ -73,7 +73,7 @@ class FeedFragment : Fragment() {
         })
         binding.container.adapter = adapter
 
-        viewModel.data.observe(viewLifecycleOwner) {state ->
+        viewModel.data.observe(viewLifecycleOwner) { state ->
             adapter.submitList(state.posts)
             binding.empty.isVisible = state.empty
             binding.errorGroup.isVisible = state.error

@@ -7,7 +7,7 @@ data class Post(
     val content: String = "",
     val published: String = "",
     val author: String = "",
-    val avatar: String = "",
+    val authorAvatar: String = "",
     val likedByMe: Boolean = false,
     val sharedByMe: Boolean = false,
     val video: String? = null,

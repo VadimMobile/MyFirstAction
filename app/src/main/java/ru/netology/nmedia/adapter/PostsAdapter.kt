@@ -48,18 +48,17 @@ class PostsAdapter(
 class PostViewHolder(
     private val binding: CardPostBinding,
     private val OnInteractionListener: OnInteractionListener,
-    private val urls: List<String> = listOf("netology.jpg", "sber.jpg", "tcs.jpg", "404.png"),
-    private var index: Int = 0
 ) : RecyclerView.ViewHolder(binding.root) {
 
-    init {
-        val url = "http://10.0.2.2:9999/avatars/${urls[index++]}"
-        Glide.with(binding.avatar)
-            .load(url)
-            .into(binding.avatar)
-    }
 
     fun bind(post: Post) = with(binding) {
+
+        val url = "http://10.0.2.2:9999/avatars/${post.authorAvatar}"
+        Glide.with(binding.authorAvatar)
+            .load(url)
+            .timeout(10_000)
+            .into(binding.authorAvatar)
+
         author.text = post.author
         published.text = post.published
         content.text = post.content

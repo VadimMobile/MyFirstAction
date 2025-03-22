@@ -57,6 +57,7 @@ class PostViewHolder(
         Glide.with(binding.authorAvatar)
             .load(url)
             .timeout(10_000)
+            .circleCrop()
             .into(binding.authorAvatar)
 
         author.text = post.author

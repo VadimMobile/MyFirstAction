@@ -20,6 +20,7 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
+
     buildTypes {
         release {
             isMinifyEnabled = false
@@ -28,9 +29,11 @@ android {
                 "proguard-rules.pro"
             )
             manifestPlaceholders["usesCleartextTraffic"] = false
+            buildConfigField ("String", "BASE_URL", "\"https://netomedia.ru\"")
         }
         debug {
-            manifestPlaceholders["usesCleartextTraffic"]  = true
+            manifestPlaceholders["usesCleartextTraffic"] = true
+            buildConfigField ("String", "BASE_URL", "\"http://10.0.2.2:9999\"")
         }
     }
     compileOptions {
@@ -40,9 +43,9 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
-buildFeatures{
-    viewBinding = true
-}
+    buildFeatures {
+        viewBinding = true
+    }
 }
 
 dependencies {
@@ -51,6 +54,7 @@ dependencies {
     implementation(libs.androidx.navigation.fragment.ktx)
     implementation(libs.androidx.navigation.ui.ktx)
     implementation(libs.androidx.room.common)
+    implementation(libs.transport.api)
     val coreVersion = "1.15.0"
     val appcompatVersion = "1.7.0"
     val mdcVersion = "1.12.0"
@@ -65,24 +69,29 @@ dependencies {
     val fragmentVersion = "1.8.5"
     val roomVersion = "2.6.1"
     val firebaseVersion = "33.10.0"
+    val retrofitVersion = "2.11.0"
+    val retrofitgsonVersion = "2.11.0"
+    val okhttpLoggingVersion = "4.12.0"
 
 
-
-    implementation ("androidx.core:core-ktx:$coreVersion")
-    implementation ("androidx.appcompat:appcompat:$appcompatVersion")
-    implementation ("com.google.android.material:material:$mdcVersion")
-    implementation ("androidx.constraintlayout:constraintlayout:$constraintlayoutVersion")
-    implementation ("androidx.recyclerview:recyclerview:$recyclerviewVersion")
-    implementation ("androidx.activity:activity-ktx:$activityVersion")
-    implementation ("androidx.fragment:fragment-ktx:$fragmentVersion")
-    implementation ("androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleVersion")
-    implementation ("androidx.lifecycle:lifecycle-livedata-ktx:$lifecycleVersion")
-    implementation ("com.google.code.gson:gson:$gsonVersion")
+    implementation("androidx.core:core-ktx:$coreVersion")
+    implementation("androidx.appcompat:appcompat:$appcompatVersion")
+    implementation("com.google.android.material:material:$mdcVersion")
+    implementation("androidx.constraintlayout:constraintlayout:$constraintlayoutVersion")
+    implementation("androidx.recyclerview:recyclerview:$recyclerviewVersion")
+    implementation("androidx.activity:activity-ktx:$activityVersion")
+    implementation("androidx.fragment:fragment-ktx:$fragmentVersion")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleVersion")
+    implementation("androidx.lifecycle:lifecycle-livedata-ktx:$lifecycleVersion")
+    implementation("com.google.code.gson:gson:$gsonVersion")
     implementation("androidx.room:room-runtime:$roomVersion")
     kapt("androidx.room:room-compiler:$roomVersion")
     implementation(platform("com.google.firebase:firebase-bom:$firebaseVersion"))
     implementation("com.google.firebase:firebase-messaging-ktx")
-    implementation ("com.github.bumptech.glide:glide:4.14.2")
+    implementation("com.github.bumptech.glide:glide:4.14.2")
+    implementation("com.squareup.retrofit2:retrofit:$retrofitVersion")
+    implementation("com.squareup.retrofit2:converter-gson:$retrofitgsonVersion")
+    implementation ("com.squareup.okhttp3:logging-interceptor:$okhttpLoggingVersion")
 
     // define a BOM and its version
     implementation(platform("com.squareup.okhttp3:okhttp-bom:4.12.0"))
@@ -91,8 +100,8 @@ dependencies {
     implementation("com.squareup.okhttp3:okhttp")
     implementation("com.squareup.okhttp3:logging-interceptor")
 
-    testImplementation ("junit:junit:$junitVersion")
-    androidTestImplementation ("androidx.test.ext:junit:$extJunitVersion")
-    androidTestImplementation ("androidx.test.espresso:espresso-core:$espressoCoreVersion")
-    annotationProcessor ("com.github.bumptech.glide:compiler:4.14.2")
+    testImplementation("junit:junit:$junitVersion")
+    androidTestImplementation("androidx.test.ext:junit:$extJunitVersion")
+    androidTestImplementation("androidx.test.espresso:espresso-core:$espressoCoreVersion")
+    annotationProcessor("com.github.bumptech.glide:compiler:4.14.2")
 }

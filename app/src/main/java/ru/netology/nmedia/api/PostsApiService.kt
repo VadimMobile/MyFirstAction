@@ -10,19 +10,20 @@ import retrofit2.http.Body
 import retrofit2.http.DELETE
 import retrofit2.http.GET
 import retrofit2.http.POST
+import retrofit2.http.Path
 import ru.netology.nmedia.dto.Post
 
 interface PostsApiService {
     @GET("posts")
     fun getAll(): Call<List<Post>>
-    @POST("posts")
-    fun likeById(): Call<List<Post>>
-    @POST("posts")
-    fun  dislikeById(): Call<List<Post>>
+    @POST("posts/{id}/likes")
+    fun likeById(@Path("id") id: Long): Call<Post>
+    @DELETE("posts/{id}/likes")
+    fun dislikeById(@Path("id") id: Long): Call<Post>
     @DELETE("posts")
     fun removeById(): Call<Unit>
     @POST("posts")
-    fun save(@Body post: POST): Call<Post>
+    fun save(@Body post: Post): Call<Post>
 }
 
 

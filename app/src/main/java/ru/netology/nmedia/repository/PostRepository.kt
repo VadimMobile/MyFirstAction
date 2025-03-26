@@ -32,6 +32,11 @@ interface PostRepository {
         fun onError(e: Exception)
     }
 
+    interface DislikeByIdCallback {
+        fun onSuccess(posts: Post)
+        fun onError(e: Exception)
+    }
+
     interface RemoveByIdCallback {
         fun onSuccess(id: Long)
         fun onError(e: Exception)

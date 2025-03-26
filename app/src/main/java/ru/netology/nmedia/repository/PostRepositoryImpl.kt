@@ -11,7 +11,6 @@ import retrofit2.Callback
 import retrofit2.Response
 import ru.netology.nmedia.api.PostsApi
 import ru.netology.nmedia.dto.Post
-import java.io.IOException
 import java.util.concurrent.TimeUnit
 
 class PostRepositoryImpl : PostRepository {
@@ -29,21 +28,21 @@ class PostRepositoryImpl : PostRepository {
     private val postsType = object : TypeToken<List<Post>>() {}.type
 
     override fun getAllAsync(callback: PostRepository.GetAllCallback) {
-       PostsApi.retrofitService.getAll().enqueue(object : Callback<List<Post>> {
+        PostsApi.retrofitService.getAll().enqueue(object : Callback<List<Post>> {
 
-           override fun onResponse(call: Call<List<Post>>, response: Response<List<Post>>) {
-               if (response.isSuccessful){
-                   callback.onSuccess(response.body() ?: throw RuntimeException("body is null"))
-               }else{
-                   callback.onError(RuntimeException("${response.code()}: ${response.message()}"))
-               }
-           }
+            override fun onResponse(call: Call<List<Post>>, response: Response<List<Post>>) {
+                if (response.isSuccessful){
+                    callback.onSuccess(response.body() ?: throw RuntimeException("body is null"))
+                }else{
+                    callback.onError(RuntimeException("${response.code()}: ${response.message()}"))
+                }
+            }
 
-           override fun onFailure(call: Call<List<Post>>, e: Throwable) {
-              callback.onError(Exception(e))
-           }
+            override fun onFailure(call: Call<List<Post>>, e: Throwable) {
+                callback.onError(Exception(e))
+            }
 
-       })
+        })
     }
 
     override fun likeByIdAsync(post: Post, callback: PostRepository.LikeByIdCallback) {
@@ -74,7 +73,7 @@ class PostRepositoryImpl : PostRepository {
                 if (response.isSuccessful) {
                     val body = response.body()
                     if (body != null) {
-                        callback.onSuccess(post)
+                        callback.onSuccess(body)
                     } else {
                         callback.onError(RuntimeException("Response body is null"))
                     }

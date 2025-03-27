@@ -46,15 +46,14 @@ class PostRepositoryImpl : PostRepository {
     }
 
     override fun likeByIdAsync(post: Post, callback: PostRepository.LikeByIdCallback) {
-        PostsApi.retrofitService.likeById(post.id).enqueue(object : Callback<Post> {
+        if (post.likedByMe) {
+            PostsApi.retrofitService.dislikeById(post.id)
+        } else {
+            PostsApi.retrofitService.likeById(post.id)
+        }.enqueue(object : Callback<Post> {
             override fun onResponse(call: Call<Post>, response: Response<Post>) {
                 if (response.isSuccessful) {
-                    val body = response.body()
-                    if (body != null) {
-                        callback.onSuccess(body)
-                    } else {
-                        callback.onError(RuntimeException("Response body is null"))
-                    }
+                    callback.onSuccess(response.body() ?: throw RuntimeException("body is null"))
                 } else {
                     callback.onError(RuntimeException("${response.code()}: ${response.message()}"))
                 }
@@ -67,27 +66,6 @@ class PostRepositoryImpl : PostRepository {
     }
 
 
-    override fun dislikeByIdAsync(post: Post, callback: PostRepository.LikeByIdCallback) {
-        PostsApi.retrofitService.dislikeById(post.id).enqueue(object : Callback<Post>{
-            override fun onResponse(call: Call<Post>, response: Response<Post>) {
-                if (response.isSuccessful) {
-                    val body = response.body()
-                    if (body != null) {
-                        callback.onSuccess(body)
-                    } else {
-                        callback.onError(RuntimeException("Response body is null"))
-                    }
-                } else {
-                    callback.onError(RuntimeException("${response.code()}: ${response.message()}"))
-                }
-            }
-
-            override fun onFailure(call: Call<Post>, e: Throwable) {
-                callback.onError(Exception(e))
-            }
-        })
-
-    }
 
     override fun saveAsync(post: Post, callback: PostRepository.SaveCallback) {
         PostsApi.retrofitService.save(post).enqueue(object : Callback<Post> {

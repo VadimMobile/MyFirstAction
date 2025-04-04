@@ -15,19 +15,26 @@ import ru.netology.nmedia.dto.Post
 
 interface PostsApiService {
     @GET("posts")
-    fun getAll(): Call<List<Post>>
+    suspend fun getAll(): Post
+
+    @GET ("posts/{id}")
+    suspend fun getById (@Path("id")id: Long): Post
+
     @POST("posts/{id}/likes")
-    fun likeById(@Path("id") id: Long): Call<Post>
+    suspend fun likeById(@Path("id") id: Long): Post
+
     @DELETE("posts/{id}/likes")
-    fun dislikeById(@Path("id") id: Long): Call<Post>
+    suspend fun dislikeById(@Path("id") id: Long): Post
+
     @DELETE("posts")
-    fun removeById(): Call<Unit>
+    suspend fun removeById()
+
     @POST("posts")
-    fun save(@Body post: Post): Call<Post>
+    suspend fun save(@Body post: Post): Post
 }
 
 
-object PostsApi{
+object PostsApi {
 
     const val BASE_URL = "${BuildConfig.BASE_URL}/api/slow/"
     val retrofitService by lazy {
@@ -46,6 +53,6 @@ object PostsApi{
             .client(client)
             .baseUrl(BASE_URL)
             .build()
-retrofit.create(PostsApiService::class.java)
+        retrofit.create(PostsApiService::class.java)
     }
 }

@@ -15,7 +15,7 @@ import ru.netology.nmedia.dto.Post
 
 interface PostsApiService {
     @GET("posts")
-    suspend fun getAll(): Post
+    suspend fun getAll(): List<Post>
 
     @GET ("posts/{id}")
     suspend fun getById (@Path("id")id: Long): Post
@@ -27,7 +27,7 @@ interface PostsApiService {
     suspend fun dislikeById(@Path("id") id: Long): Post
 
     @DELETE("posts")
-    suspend fun removeById()
+    suspend fun removeById(id: Long)
 
     @POST("posts")
     suspend fun save(@Body post: Post): Post

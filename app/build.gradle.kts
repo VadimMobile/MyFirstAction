@@ -73,6 +73,7 @@ dependencies {
     val retrofitVersion = "2.11.0"
     val retrofitgsonVersion = "2.11.0"
     val okhttpLoggingVersion = "4.12.0"
+    val swiperefreshVersion = "1.1.0"
 
 
     implementation("androidx.core:core-ktx:$coreVersion")
@@ -87,6 +88,7 @@ dependencies {
     implementation("com.google.code.gson:gson:$gsonVersion")
     implementation("androidx.room:room-runtime:$roomVersion")
     implementation("androidx.room:room-ktx:$roomVersion")
+    implementation("androidx.swiperefreshlayout:swiperefreshlayout:$swiperefreshVersion")
     kapt("androidx.room:room-compiler:$roomVersion")
     implementation(platform("com.google.firebase:firebase-bom:$firebaseVersion"))
     implementation("com.google.firebase:firebase-messaging-ktx")
